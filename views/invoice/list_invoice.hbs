@@ -1,0 +1,136 @@
+{{> static }}
+{{> header }}
+{{> sidebar }}
+
+
+
+
+<div class="page-content">
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+            <h2 class="h5 no-margin-bottom">List of Invoice</h2>
+        </div>
+    </div>
+    <!-- Breadcrumb-->
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('users.index') }}">Home</a></li>
+            <li class="breadcrumb-item active">Invoice</li>
+        </ul>
+    </div>
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header"
+                    style="display: flow-root; align-items: flex-start;-ms-flex-pack: justify;justify-content: space-between;padding: 1rem 1rem;border-bottom: 1px solid #e9ecef;border-bottom-color: rgb(233, 236, 239);border-top-left-radius: .3rem;border-top-right-radius: .3rem;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p id="debug-url"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="no-padding-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="block margin-bottom-sm">
+                        <div class="title"><strong>Basic Table</strong>
+                            <div class="float-right" style="margin-bottom: 30px;">
+                                <button modal-name="myModal1" data-toggle="modal" data-target="#myModal1" type="button"
+                                    class="btn btn-success" style="padding: 9px 22px;">Export Data
+                                    to Excel
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+
+                            <table id="invoice" class="display table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Date</th>
+                                        <th>Party Name</th>
+                                        <th>Party City</th>
+                                        <th>Total Amount</th>
+                                        <th>Party Contact Person</th>
+                                        <th>Party Contact No.</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="all_modals">
+            <div id="myModal1" tabindex="2" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true"
+                class="modal fade text-left">
+                <form method="post" action="{{ url_for('invoices.export') }}">
+                    <div role="document" class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header"><strong id="exampleModalLabel1" class="modal-title">Export Excel
+                                    Workbook</strong>
+                                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                                        aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Please provide the starting and ending date as filters for export</p>
+                                <div class="myModal1_add_serial">
+
+                                    <div class="form-group" id="Dates">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="form-control-label" style="font-weight: 600"> Start
+                                                    Date</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-control-label"> End Date</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input data-date-format="dd-mm-yyyy" type="text"
+                                                    class="datepicker form-control" id="start_date" name="start_date">
+                                                <p><i class="icon-calendar"></i>icon-calender</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input data-date-format="dd-mm-yyyy" type="text"
+                                                    class="datepicker form-control" id="end_date" name="end_date"><span
+                                                    class="add-on"><i data-date-icon="icon-calendar"></i></span>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+{{> footer }}

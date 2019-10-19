@@ -1,0 +1,164 @@
+
+
+{{> static }}
+{{> header }}
+{{> sidebar }}
+
+<div class="page-content">
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+            <h2 class="h5 no-margin-bottom">Invoice Creation</h2>
+        </div>
+    </div>
+    <!-- Breadcrumb-->
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+            <li class="breadcrumb-item"><a href="/invoice">Invoices</a></li>
+            <li class="breadcrumb-item active">Create Invoice</li>
+        </ul>
+    </div>
+    <section class="no-padding-top">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="block">
+                        <div class="title"><strong>Basic Details</strong></div>
+                        <div class="block-body">
+                            <form class="form-horizontal">
+
+                                <div class="row">
+                                    <label class="col-sm-3 form-control-label">Material Inputs</label>
+                                    <div class="col-sm-9">
+                                        <div class="form-group-material">
+                                            <input id="name" type="text" name="name" required class="input-material">
+                                            <label for="name" class="label-material">Name of Company</label>
+                                        </div>
+                                        <div class="form-group-material">
+                                            <input id="email" type="email" name="email" required class="input-material">
+                                            <label for="email" class="label-material">Email Address </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="line"></div>
+                                <div class="title"><strong>Goods and Services Taxpayer Information</strong></div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">GSTIN</label>
+                                    <div class="col-sm-9">
+                                        <input id="gstin" name="gstin" type="text" class="form-control">
+                                        <small id="test1" class="help-block-none"
+                                            style="color: red;padding: 0 0 0 5px;margin-top: 0px; font-size: 90%; font-weight: 501;">GSTIN
+                                            is requied</small>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="title"><strong>Address of Headquaters</strong></div>
+                                <div class="line"></div>
+                                <div class="row">
+                                    <label class="col-sm-3 form-control-label">Address</label>
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group-material">
+                                                    <input id="local_address" type="text" name="local_address"
+                                                        class="input-material">
+                                                    <label for="local_address" class="label-material">Local
+                                                        Address</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group-material">
+                                                    <input id="city" type="text" name="city" class="input-material">
+                                                    <label for="city" class="label-material">City</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+
+                                            <div class="col-md-4">
+                                                <div class="form-group-material">
+                                                    <input id="pincode" type="text" name="pincode"
+                                                        class="input-material">
+                                                    <label for="pincode" class="label-material">PINCODE</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group-material">
+                                                    <input id="state" type="text" name="state" required
+                                                        class="input-material">
+                                                    <label for="state" class="label-material">State</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group-material">
+                                                    <input id="country" type="text" name="country" required
+                                                        class="input-material" value="India">
+                                                    <label for="country" class="label-material">Country</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="title"><strong>Bank Account Information</strong></div>
+                                <div class="line"></div>
+                                <div class="row">
+                                    <label class="col-sm-3 form-control-label">Bank Details</label>
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group-material">
+                                                    <input id="local_address" type="text" name="local_address"
+                                                        class="input-material">
+                                                    <label for="local_address" class="label-material">Bank Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group-material">
+                                                    <input id="local_address" type="text" name="local_address"
+                                                        class="input-material">
+                                                    <label for="local_address" class="label-material">Branch</label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group-material">
+                                                            <input id="pincode" type="text" name="pincode"
+                                                                class="input-material">
+                                                            <label for="pincode" class="label-material">Account
+                                                                Number</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group-material">
+                                                            <input id="state" type="text" name="state" required
+                                                                class="input-material">
+                                                            <label for="state" class="label-material">IFS Code</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <div class="col-sm-9 ml-auto">
+                                        <button type="cancel" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{{> footer }}

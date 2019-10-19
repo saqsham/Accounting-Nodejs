@@ -1,0 +1,391 @@
+{{> static }}
+{{> header }}
+{{> sidebar }}
+
+<div class="page-content">
+    <!-- All Items-->
+    <div id="items" class="items" style="display: none;">
+        {% for item in items %}
+        <div class="item" model-name={{ item.model_name }} id="item_{{ item.model_name }}" item_id="{{ item._id }}"
+            tax="{{ item.tax }}" price="{{ item.price }}">
+        </div>
+
+        {% endfor %}
+        <div id="my_company" gstin={{ company.gstin }} tax_type="{{ invoice_package['tax_type'] }}"
+            items_quantity="{{ invoice_package['total_items'] }}"></div>
+    </div>
+
+    <!-- All Items end-->
+
+
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+            <h2 class="h5 no-margin-bottom">Invoice Creation</h2>
+        </div>
+    </div>
+    <!-- Breadcrumb-->
+
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('users.index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('invoices.index') }}">Invoices</a></li>
+            <li class="breadcrumb-item active">Edit Invoice</li>
+        </ul>
+    </div>
+    <section class="no-padding-top">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="block">
+                        <div class="title"><strong>Basic Details</strong></div>
+                        <div class="block-body">
+                            <form method="post" class="form-horizontal">
+                                <div class="form-group row margin-row">
+                                    <label for="number" class="col-sm-1 form-control-label">No.</label>
+                                    <div class="col-sm-2">
+                                        <input required id="number" name="number" type="text" class="form-control"
+                                            value="{{ invoice_package['invoice'].no }}">
+                                    </div>
+                                    <label for="date" class="col-sm-1 form-control-label">Date</label>
+                                    <div class="col-sm-2">
+                                        <input id="date" name="date" data-date-format="dd-mm-yyyy" type="text"
+                                            class="datepicker form-control"
+                                            value="{{ invoice_package['invoice'].date }}" required><span
+                                            class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                    <!--label class="col-sm-1 form-control-label">Party A/c Name</label-->
+                                    <div class="col-sm-6 div_select" id="div_select_party">
+                                        <select id="select_party" name="select_party"
+                                            class="selectpicker select_id form-control mb-3 mb-3 "
+                                            data-live-search="true" required>
+
+                                            {% for party in parties %}
+                                            <option
+                                                {% if invoice_package['invoice'].party_id==party._id %}{{ 'selected' }}{% endif %}
+                                                party-id="{{ party._id }}" value="{{ party.gstin}}"
+                                                data-token="{{ party.name }} {{ party.city }}">{{ party.name }}
+                                                ,{{ party.city }}</option>
+                                            {% endfor %}
+                                            <!--option data-token="option 1">option 1</option>
+                                                <option data-token="option 1">option 2</option>
+                                                <option data-token="option 1">option 3</option>
+                                                <option data-token="option 1">option 4</option-->
+                                        </select>
+                                        <!--small class="help-block-none">Select from alredy Added</small-->
+                                    </div>
+
+                                </div>
+
+                                <div id="particulars" onclick="party()">
+                                    <div class="line"></div>
+                                    <div class="title"><strong>Particulars</strong></div>
+                                    <div class="line"></div>
+                                    <div class="form-group row margin-row">
+                                        <label id="name" class="col-sm-3 form-control-label"
+                                            style="max-width: 30%;flex: 0 0 auto;"><strong>Name of
+                                                Item</strong></label>
+                                        <label id="name" class="col-sm-2 form-control-label"
+                                            style="max-width: 11.4%;"><strong>Quantity</strong></label>
+                                        <label id="name" class="col-sm-2 form-control-label"><strong>Rate
+                                                per</strong></label>
+                                        <label id="name" class="col-sm-2 form-control-label"><strong>Amount
+                                                Price</strong></label>
+                                        <label id="name"
+                                            class="col-sm-3 form-control-label"><strong>Options</strong></label>
+
+                                    </div>
+
+
+                                    <div id="add_new_item_div">
+
+                                        {% for invoice_item in invoice_package['invoice_items'] %}
+                                        <div id="item_row_{{ invoice_item.sr_no }}_div"
+                                            class="form-group row margin-row">
+                                            <!--label id="name" name="name" class="col-sm-1 form-control-label">No.</label-->
+                                            <div class="col-sm-3 div_select" id="div_select_item"
+                                                style="max-width: 30%;flex: 0 0 auto;">
+                                                <select id="select_item_{{ invoice_item.sr_no }}"
+                                                    name="select_item_{{ invoice_item.sr_no }}"
+                                                    class="select_item form-control mb-3 mb-3 selectpicker"
+                                                    data-live-search="true" required>
+                                                    <option value="blank" disabled selected data-token="Name of Item">
+                                                        Name of
+                                                        Item
+                                                    </option>
+                                                    {% for item in items %}
+                                                    <option
+                                                        {% if invoice_item['item']._id==item._id %}{{ 'selected' }}{% endif %}
+                                                        value="select_item_1_{{ item.model_name }}"
+                                                        data-token="{{ item.model_name}}">
+                                                        {{ item.model_name }}
+                                                    </option>
+                                                    {% endfor %}
+                                                    <!--option value="option 1" data-token="option 1">option 1</option>
+                                                    <option value="option 2" data-token="option 2">option 2</option>
+                                                    <option value="option 3" data-token="option 3">option 3</option>
+                                                    <option value="option 4" data-token="option 4">option 4</option-->
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-2" style="max-width: 11.4%;">
+                                                <input
+                                                    myModal{{ invoice_item['sr_no'] }}_total_quantity="{{ invoice_item['invoice_item'].quantity }}"
+                                                    id="quantity_{{ invoice_item['sr_no'] }}"
+                                                    name="quantity_{{ invoice_item['sr_no'] }}" type="text"
+                                                    class="item_quantity form-control" placeholder="Quantity"
+                                                    value="{{ invoice_item['invoice_item'].quantity }}" required>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <input id="rate_per_{{ invoice_item['sr_no'] }}"
+                                                    name="rate_per_{{ invoice_item['sr_no'] }}" type="text"
+                                                    class="item_rate_per form-control" placeholder="Rate per"
+                                                    value="{{ invoice_item['invoice_item'].rate_per }}" required>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input id="amount_{{ invoice_item['sr_no'] }}"
+                                                    name="amount_{{ invoice_item['sr_no'] }}" type="text"
+                                                    class="form-control amount" placeholder="Amount"
+                                                    value="{{ invoice_item['amount'] }}" required>
+                                            </div>
+                                            <div class="col-sm-3" style="padding-right: 0;">
+
+                                                <button modal-name="myModal{{ invoice_item['sr_no'] }}"
+                                                    data-toggle="modal"
+                                                    data-target="#myModal{{ invoice_item['sr_no'] }}" type="button"
+                                                    class="btn btn-primary" style="margin-right: 20px;">Serial No.
+                                                </button>
+                                                <!--button id="item_row_1" type="button" class="btn btn-danger" style="background-color: red">Delete</button-->
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <!--label class="col-sm-3 form-control-label">Add New Item</label-->
+                                        <div class="col-sm-3 ml-auto">
+                                            <button id="add_new_item" type="button" class="btn btn-info">Add New Item In
+                                                same invoice
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                    <div id="same_state">
+                                        <div class="form-group row margin-row">
+                                            <div class="col-sm-3" style="max-width: 30%;flex: 0 0 auto;">
+                                                <input id="cgs" name="cgs" type="text" class="form-control "
+                                                    placeholder="CGST" value="CGST" disabled>
+                                            </div>
+                                            <div class="col-sm-2" style="max-width: 11.4%;">
+                                            </div>
+                                            <div class="col-sm-2">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input id="cgst" name="cgst" type="text" class="form-control "
+                                                    placeholder="Amount" value="{{ invoice_package['tax'] }}" readonly>
+                                            </div>
+                                            <div class="col-sm-2">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group row margin-row">
+                                            <div class="col-sm-3" style="max-width: 30%;flex: 0 0 auto;">
+                                                <input id="sgs" name="sgs" type="text" class="form-control "
+                                                    placeholder="SGST" value="SGST" disabled>
+                                            </div>
+                                            <div class="col-sm-2" style="max-width: 11.4%;">
+                                            </div>
+                                            <div class="col-sm-2">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input id="sgst" name="sgst" type="text" class="form-control "
+                                                    placeholder="Amount" value="{{ invoice_package['tax'] }}" readonly>
+                                            </div>
+                                            <div class="col-sm-2">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div id="different_state">
+                                        <div class="form-group row margin-row">
+                                            <div class="col-sm-3" style="max-width: 30%;flex: 0 0 auto;">
+                                                <input id="igs" name="igs" type="text" class="form-control "
+                                                    placeholder="IGST" value="IGST" disabled>
+                                            </div>
+                                            <div class="col-sm-2" style="max-width: 11.4%;">
+                                            </div>
+                                            <div class="col-sm-2">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input id="igst" name="igst" type="text" class="form-control "
+                                                    placeholder="Amount" value="{{ invoice_package['tax'] }}" readonly>
+                                            </div>
+                                            <div class="col-sm-2">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group row margin-row">
+                                        <div class="col-sm-3" style="max-width: 30%;flex: 0 0 auto;">
+                                            <input id="round_off_ip" name="round_off_ip" type="text"
+                                                class="form-control " placeholder="Round Off" value="Round off"
+                                                disabled>
+                                        </div>
+                                        <div class="col-sm-2" style="max-width: 11.4%;">
+                                        </div>
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input id="round_off" name="round_off" type="text" class="form-control "
+                                                placeholder="Amount" value="{{ invoice_package['round_off'] }}"
+                                                readonly>
+                                        </div>
+                                        <div class="col-sm-2">
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row margin-row">
+                                        <div class="col-sm-3" style="max-width: 30%;flex: 0 0 auto;">
+                                            <input id="total_amount_ip" name="total_amount_ip" type="text"
+                                                class="form-control " placeholder="Total" value="Total amount" disabled>
+                                        </div>
+                                        <div class="col-sm-2" style="max-width: 11.4%;">
+                                        </div>
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input id="total_amount" name="total_amount" type="text"
+                                                class="form-control " placeholder="Amount"
+                                                value="{{ invoice_package['total'] }}" readonly>
+                                        </div>
+                                        <div class="col-sm-2">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row margin-row" id="e-way">
+                                    <div class="col-sm-3" style="max-width: 28.5%;flex: 0 0 auto;">
+                                    </div>
+                                    <div class="row col-sm-4" style="padding: 6px 0 6px 0;background: currentColor;">
+                                        <div class="col-sm-6" style="max-width: 50%;">
+                                            <input id="e_way_ip" name="e_way_ip" type="text" class="form-control "
+                                                placeholder="e-Way Bill No." readonly value="e-Way Bill No." disabled>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input style="background: #2d3035" id="e_way" name="e_way" type="text"
+                                                class="form-control " placeholder="e-Way No."
+                                                value="{{ invoice_package['invoice'].e_way }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+
+                                </div>
+                                <div class="form-group row margin-row">
+                                    <label for="narration" class="col-sm-12 form-control-label">Narration</label>
+                                    <div class="col-sm-12">
+                                        <textarea id="narration" name="narration" rows="3"
+                                            class="form-control">{{ invoice_package['invoice'].narration }}</textarea>
+                                    </div>
+
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 ml-auto ">
+                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+
+                                <div id="all_modals">
+                                    {% for invoice_item in invoice_package['invoice_items'] %}
+                                    <div id="myModal{{ invoice_item['sr_no'] }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel{{ invoice_item['sr_no'] }}"
+                                        aria-hidden="true" class="modal fade text-left">
+                                        <div role="document" class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header"><strong
+                                                        id="exampleModalLabel{{ invoice_item['sr_no'] }}"
+                                                        class="modal-title">Serial
+                                                        Numbers</strong>
+                                                    <button type="button" data-dismiss="modal"
+                                                        aria-label="Close focus_on_add_new" class="close"><span
+                                                            aria-hidden="true">×</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>How about all the serial numbers here.</p>
+                                                    <div class="myModal{{ invoice_item['sr_no'] }}_add_serial">
+
+                                                        {% for serial_nos in invoice_item['serial_no'] %}
+
+                                                        <div class="form-group"
+                                                            id="myModal{{ invoice_item['sr_no'] }}_serial_no_remove_{{ loop.index }}_div">
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <input
+                                                                        id="myModal{{ invoice_item['sr_no'] }}_serial_no_{{ loop.index }}"
+                                                                        name="myModal{{ invoice_item['sr_no'] }}_serial_no_{{ loop.index }}"
+                                                                        type="text" placeholder="Serial Number"
+                                                                        class="serial_no form-control"
+                                                                        value="{{ serial_nos.serial_no }}">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>
+                                                                        <p></p>
+                                                                    </label>
+                                                                    <input type="button"
+                                                                        id="myModal{{ invoice_item['sr_no'] }}_serial_no_remove_{{ loop.index }}"
+                                                                        value="Delete"
+                                                                        class="btn btn-danger serial_no_remove"
+                                                                        style="background-color: red;">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!--div class="form-group">
+                                                          <label>Password</label>
+                                                          <input type="password" placeholder="Password" class="form-control">
+                                                        </div-->
+                                                    <div class="form-group">
+                                                        <input modal-name="myModal{{ invoice_item['sr_no'] }}"
+                                                            type="button" value="Add"
+                                                            class="button_serial_no btn btn-primary">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal"
+                                                        class="btn btn-secondary focus_on_add_new">Close
+                                                    </button>
+                                                    <button modal-name="myModal{{ invoice_item['sr_no'] }}"
+                                                        type="button"
+                                                        class="btn btn-primary modal_save focus_on_add_new">Save changes
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{> footer }}

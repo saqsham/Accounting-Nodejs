@@ -1,0 +1,189 @@
+
+{{> static }}
+{{> header }}
+{{> sidebar }}
+
+
+<div class="page-content">
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+            <h2 class="h5 no-margin-bottom">Invoice Creation</h2>
+        </div>
+    </div>
+    <!-- Breadcrumb-->
+
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Company</a></li>
+            <li class="breadcrumb-item active">Edit Company</li>
+        </ul>
+    </div>
+    <section class="no-padding-top">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="block">
+                        <div class="title"><strong>Basic Details</strong></div>
+                        <div class="block-body">
+                            <form class="form-horizontal" method="post">
+                                <div class="row">
+                                    <label class="col-sm-3 form-control-label">Material Inputs</label>
+                                    <div class="col-sm-9">
+                                        <div class="form-group-material">
+                                            <input id="name" type="text" name="name" required class="input-material"
+                                                value="{{ company.name }}">
+                                            <label for="name" class="label-material active">Name of Company</label>
+                                        </div>
+                                        <div class="form-group-material">
+                                            <input id="email" type="email" name="email" required class="input-material"
+                                                value="{{ company.email }}">
+                                            <label for="email" class="label-material active">Email Address </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="line"></div>
+                                <div class="title"><strong>Goods and Services Taxpayer Information</strong></div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">GSTIN</label>
+                                    <div class="col-sm-9">
+                                        <input id="gstin" name="gstin" type="text" class="form-control"
+                                            value="{{ company.gstin }}" required>
+                                        <small id="test1" class="help-block-none"
+                                            style="color: red;padding: 0 0 0 5px;margin-top: 0px; font-size: 90%; font-weight: 501;">
+                                            GSTIN is requied
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+
+                                <div class="line"></div>
+                                <div class="title"><strong>Address of Headquaters</strong></div>
+                                <div class="line"></div>
+                                <div class="row">
+                                    <label class="col-sm-3 form-control-label">Address</label>
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group-material">
+                                                    <input id="address" type="text" name="address"
+                                                        class="input-material" value="{{ company.address }}" required>
+                                                    <label for="address" class="label-material">Local
+                                                        Address</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group-material">
+                                                    <input id="city" type="text" name="city" class="input-material"
+                                                        value="{{ company.city }}" required>
+                                                    <label for="city" class="label-material active">City</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+
+                                            <div class="col-md-4">
+                                                <div class="form-group-material">
+                                                    <input id="pincode" type="text" name="pincode"
+                                                        class="input-material" value="{{ company.pincode }} " required>
+                                                    <label for="pincode" class="label-material active">PINCODE</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group-material">
+                                                    <input id="state" type="text" name="state" class="input-material"
+                                                        value="{{ company.state }}" readonly>
+                                                    <label for="state" class="label-material active">State</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group-material">
+                                                    <input id="country" type="text" name="country" required
+                                                        class="input-material active" value="India"
+                                                        aria-required="true">
+                                                    <label for="country" class="label-material">Country</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="line"></div>
+                                <div class="title"><strong>Bank Account Information</strong></div>
+                                <div class="line"></div>
+
+
+                                <div class="row">
+                                    <label class="col-sm-3 form-control-label">Bank Details</label>
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group-material">
+                                                    <input id="bank_name" type="text" name="bank_name"
+                                                        class="input-material" value="{{ company.bank_name }}" required>
+                                                    <label for="bank_name" class="label-material active">Bank
+                                                        Name</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group-material">
+                                                    <input id="branch" type="text" name="branch" class="input-material"
+                                                        value="{{ company.branch }}" required>
+                                                    <label for="branch" class="label-material active">Branch</label>
+                                                </div>
+                                                <div class="row">
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group-material">
+                                                            <input id="account_number" type="text" name="account_number"
+                                                                class="input-material"
+                                                                value="{{ company.account_number }}" required>
+                                                            <label for="account_number"
+                                                                class="label-material active">Account
+                                                                Number</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group-material">
+                                                            <input id="ifsc" type="text" name="ifsc"
+                                                                class="input-material" value="{{ company.ifsc }}"
+                                                                required>
+                                                            <label for="ifsc" class="label-material active">IFS
+                                                                Code</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <div class="col-sm-9 ml-auto">
+                                        <button type="cancel" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+{{> footer }}
+

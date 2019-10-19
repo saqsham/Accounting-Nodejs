@@ -1,0 +1,89 @@
+<footer class="footer">
+    <div class="footer__block block no-margin-bottom">
+        <div class="container-fluid text-center">
+            <p class="no-margin-bottom">2019 &copy; {{ website }}  Designed by <a
+                    href="https://bootstrapious.com/p/bootstrap-4-dark-admin">Kunj | Bhuvnesh | Saksham</a>.</p>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+<!-- JavaScript files-->
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="vendor/popper.js/umd/popper.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="js/charts-home.js"></script>
+<script src="js/front.js"></script>
+<script src="js/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+{{!-- 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"
+    crossorigin="anonymous"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="js/charts-home.js"></script>
+<script src="js/front.js"></script>
+<script src="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script> --}}
+
+{{!-- Handlebars.registerHelper('if_eq', function(a, b) {
+    if(a == b)
+        return true;
+    else
+        return false;
+    }); --}}
+
+
+{{! #if invoice }}
+<script src = "js/page/invoices.js" ></script>
+{{! /if}}
+
+{{!#if_eq website 'company' }}
+<script src="js/page/parties.js"></script>
+{{! /if_eq}}
+
+{{!#if_eq website 'new party' }}
+<script src="js/page/parties.js"></script>
+{{! /if_eq}}
+
+{{!#if_eq website 'party list' }}
+<script src="js/page/party_pagetable.js"></script>
+{{! /if_eq}}
+
+{{!#if_eq website 'item list' }}
+<script src="js/page/item_pagetable.js"></script>
+{{! /if_eq}}
+
+{{!#if_eq website 'new item list' }}
+<script src="js/page/items.js"></script>
+{{! /if_eq}}
+
+
+<script>
+    $(document).ready(function(){
+
+$('.database_date').datetimepicker({
+      minView: 2,
+    pickTime: false,
+    language: 'pt-BR',
+    autoclose:true,
+    });
+});
+</script>
+
+</body>
+</html>

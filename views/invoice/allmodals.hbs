@@ -1,0 +1,44 @@
+<div id="all_modals">
+    <div id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true"
+         class="modal fade text-left">
+        <div role="document" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><strong id="exampleModalLabel1" class="modal-title">Serial Numbers</strong>
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                            aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>How about all the serial numbers here.</p>
+                    <div class="myModal1_add_serial">
+
+                        <div class="form-group" id="myModal1_serial_no_remove_1_div">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input id="myModal1_serial_no_1" name="myModal1_serial_no_1" type="text"
+                                           placeholder="Serial Number" class="serial_no form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label><p></p></label>
+                                    <input type="button" id="myModal1_serial_no_remove_1" value="Delete"
+                                           class="btn btn-danger serial_no_remove" style="background-color: red;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--div class="form-group">
+                      <label>Password</label>
+                      <input type="password" placeholder="Password" class="form-control">
+                    </div-->
+                    <div class="form-group">
+                        <input modal-name="myModal1" type="button" value="Add" class="button_serial_no btn btn-primary">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                    <button modal-name="myModal1" type="button" class="btn btn-primary modal_save">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

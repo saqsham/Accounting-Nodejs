@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Easy Accounting</title>
+    <!--link href="//db.onlinewebfonts.com/c/527c5ab608cab860a6aae8ce02e14b0e?family=Calibri" rel="stylesheet" type="text/css"/-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/print_page.css') }}">
+
+    <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+    <style>
+        @page {
+            size: auto;   /* auto is the initial value */
+            /* this affects the margin in the printer settings */
+            margin: 10mm 10mm 1mm 10mm;
+        }
+
+        body {
+            /* this affects the margin on the content before sending to printer */
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div id="kk1" class="col l3">
+        <button onclick="myFunction()" style="font-size: large;margin-top: 11px;">Print this page</button>
+    </div>
+    <div class="col l6"></div>
+    <div id="kk2" class="col l3">
+        <h4><a style="font-size: 20px;" href="{{ url_for('invoices.index') }}">Return to Invoices</a></h4>
+    </div>
+
+    <div class="col l12">
+        <div class="col l3">
+
+        </div>
+        <div class="col l6">
+            <p style="font-size: 12px; text-align: center; margin-top: -1px;" class="center">TAX INVOICE</p>
+
+        </div>
+        <div class="col l3" >
+            <p id="change_for_transport" style="font-style: italic;font-style: italic; margin-top: 1px;">(Original for Recipent)</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="row" style="margin-bottom: 0px">
+    <table cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+        <tr style="font-style: normal">
+            <td colspan="2" rowspan="4"><span
+                    style="font-weight: 800;">{{ invoice_package['company'].name.upper() }}</span>
+                <br>{{ invoice_package['company'].address.upper() }}
+                <br>{{ invoice_package['company'].city.upper() }} Pin code : {{ invoice_package['company'].pincode }}
+                <br>GSTIN : {{ invoice_package['company'].gstin.upper() }}
+                <br>E-Mail : {{ invoice_package['company'].email }}</td>
+            <td colspan="1" rowspan="1"><p style="font-weight: 700;"><span style="color: grey;font-weight: normal">Invoice No.</span><br>{{ invoice_package['invoice'].no }}
+            </p></td>
+            <td colspan="1" rowspan="1"><p style="font-weight: 700;"><span style="color:grey; font-weight: normal;">Dated</span><br>{{ invoice_package['invoice'].date }}
+            </p>
+            </td>
+        </tr>
+        <tr>
+            <td><span style="color:grey;">Delivery Note</span><br>
+                <p></p></td>
+            {% if invoice_package['total']>=50000 %}
+
+            <td><span style="color:grey;">e-Way Bill No.</span><br>
+            <p style="font-weight: 700">{{ invoice_package['invoice'].e_way }}</p></td>
+            {% else %}
+            <td><p></p></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td><span style="color:grey;">Supplier's Info</span><br>
+                <p></p></td>
+            <td><span style="color:grey;">Other Reference(s)</span><br>
+                <p></p></td>
+        </tr>
+        <tr>
+            <td><span style="color:grey;">Buyers Order No.</span><br>
+                <p></p></td>
+            <td><span style="color:grey;">Dated</span><br>
+                <p></p></td>
+        </tr>
+        <tr style="font-style: normal;">
+            <td colspan="2" rowspan="6"><span style="color:grey;">Buyer</span><br>
+                <p><span style="font-weight: 800;">{{ invoice_package['party'].name.upper() }}</span>
+                    <br>{{ invoice_package['party'].address.upper() }}
+                    <br>{{ invoice_package['party'].city.upper() }}
+                    <br>M-{{ invoice_package['party'].mobile_no_1 }}<br>
+                    <br>GSTIN/UIN : {{ invoice_package['party'].gstin.upper() }}
+                    <br>State Name: {{ invoice_package['party'].state.upper() }},
+                    Code: {{ invoice_package['party'].gstin[:2] }}
+                    <br>Place of supply : {{ invoice_package['party'].state.upper() }}
+                    <br>E-Mail : {{ invoice_package['party'].email }}</p></td>
+            <!--td><span style="color:grey;">Despatch Doc No.</span><br><p></p></span><br>SE433</td>
+            <td c><span style="color:grey;"><span style="color:grey;">Delivery Note Date</span><br><p></p></td-->
+            <td><span style="color:grey;">Despatch Doc No.</span><br></td>
+            <td><span style="color:grey; ">Delivery Note Date</span><br>
+                <p></p></td>
+        </tr>
+        <tr>
+            <td><span style="color:grey; ">Despatched through</span><br>
+                <p></p></td>
+            <td><span style="color:grey;">Destination</span><br>
+                <p></p></td>
+        </tr>
+        <tr>
+            <td colspan="2" rowspan="4" style=""><span style="color:grey; min-height: 4px;">Terms of Delivery</span><br>
+                <p></p></td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+    </table>
+
+
+    <table style="height: 35px; width: 100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <td style="border-top: none; border-bottom: none;"></td>
+        </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+        <tr id="1">
+            <th style="width:3%; color:grey;"> Sr.<br>no</th>
+            <th style="width:26%; color:grey;"> Description of Goods</th>
+            <th style="width:15%; color:grey;"> HSN/SAC</th>
+            <th style="width:15%; color:grey;"> Quantity</th>
+            <th style="width:15%; color:grey;"> Rate</th>
+            <th style="width:5%; color:grey;"> per</th>
+            <th style="width:5%; color:grey;"> GST Rate</th>
+            <th style="width:15%; color:grey;"> Amount</th>
+        </tr>
+        {% for invoice_item in invoice_package['invoice_items'] %}
+            <tr style="height:15.8px" id="2">
+                <td style="border-bottom: none; border-top:none"
+                    rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                ><p>{{ invoice_item['sr_no'] }}</p></td>
+                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                    style="border-bottom: none; border-top:none;">
+                    <p style="font-weight: 800">{{ invoice_item['item'].model_name.upper() }} {{ invoice_item['item'].type_id.type_name.upper() }}<br><span
+                            style="font-size: 10px;font-weight: normal;">
+                        {% for serial_nos in invoice_item['serial_no'] %}{{ serial_nos.serial_no.upper() }}
+                            <br>{% endfor %}</span></p>
+                </td>
+                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                    style="border-bottom: none; border-top:none;"><p
+                        style="text-align: center;">{{ invoice_item['item'].hsn.upper() }}</p></td>
+                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                    style="border-bottom: none; border-top:none;"><p
+                        style="text-align: end; font-weight: 800;">{{ invoice_item['invoice_item'].quantity }} PCS</p>
+                </td>
+                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                    style="border-bottom: none; border-top:none;"><p
+                        style="text-align: end;">{{ invoice_item['invoice_item'].rate_per }}</p>
+                </td>
+                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                    style="border-bottom: none; border-top:none;"><p>PCS</p></td>
+                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                    style="border-bottom: none; border-top:none;"><p
+                        style="text-align: end">{{ invoice_item['item'].tax }}%</p></td>
+                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                    style="border-bottom: none; border-top:none;"><p
+                        style="text-align: end; font-weight: 800;">{{ invoice_item['amount'] }}</p></td>
+            </tr>
+        {% endfor %}
+        {% for i in range(13 - invoice_package['total_items']) %}
+            <tr></tr>
+        {% endfor %}
+        <!--
+        -->
+        <!--tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+      <tr></tr>
+        <tr></tr>
+        <tr></tr-->
+        <tr id="15">
+            <td><p></p></td>
+            <td><p style="font-weight: 500; text-align: end">Base Price</p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p style="text-align: end; font-weight: normal">{{ invoice_package['hsn_taxable_total'] }}</p></td>
+        </tr>
+        {% if invoice_package['tax_type']=='gst' %}
+            <tr id="16">
+                <td><p></p></td>
+                <td><p style="font-weight: 700; text-align: end">CGST</p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['tax'] }}</p></td>
+            </tr>
+            <tr id="17">
+                <td><p></p></td>
+                <td><p style="font-weight: 700; text-align: end">SGST</p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p style="text-align: end;font-weight: 800">{{ invoice_package['tax'] }}</p></td>
+            </tr>
+        {% else %}
+
+            <tr id="17">
+                <td><p></p></td>
+                <td><p style="font-weight: 700; text-align: end">IGST</p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p></p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['tax'] }}</p></td>
+            </tr>
+        {% endif %}
+        <tr id="18">
+            <td><p></p></td>
+            <td><p style="text-align: end; font-weight: 700;">Rounding Off</p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['round_off'] }}</p></td>
+        </tr>
+        <tr id="19">
+            <td><p></p></td>
+            <td><p>Total</p></td>
+            <td><p></p></td>
+            <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_quantity'] }} PCS</p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p></p></td>
+            <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total'] }}</p></td>
+        </tr>
+    </table>
+    <table id="words_table" cellpadding="0" cellspacing="0" style="width: 100%; page-break-after: auto; ">
+        <tr>
+            <td style="border-top:none; border-bottom: none;"><span
+                    style="color:grey">Amount Chargeable (in words)</span><br>
+                <p style="font-weight: 800">{{ invoice_package['total_words'] }} Only</p></td>
+        </tr>
+    </table>
+    {% if invoice_package['tax_type']=="gst" %}
+        <table id="hsn_sac" cellpadding="0" cellspacing="0"
+               style="width: 100%; border-collapse: collapse; height: 12px;">
+            <tr id="1">
+                <th rowspan="2" style=" width:25%; color:grey; vertical-align: middle;"> HSN/SAC</th>
+                <th rowspan="2" style="width:10%; color:grey; vertical-align: middle;"> Taxable</th>
+                <th colspan="2" style="width:20%; color:grey;"> Central Tax</th>
+                <th colspan="2" style="width:20%; color:grey;"> State Tax</th>
+                <th rowspan="2" style="width:25%; color:grey; vertical-align: middle;"> Total <br>Tax Amount</th>
+            </tr>
+            <tr id="1">
+                <th style="width:10%; color:grey;"> Rate</th>
+                <th style="width:10%; color:grey;"> Amount</th>
+                <th style="width:10%; color:grey;"> Rate</th>
+                <th style="width:10%; color:grey;"> Amount</th>
+
+            </tr>
+            {% for x in invoice_package['hsn_list'] %}
+                <tr id="1">
+                    <td><p>{{ x }}</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][0] }}</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][4] }}%</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][2] }}</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][4] }}%</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][2] }}</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][3] }}</p></td>
+                </tr>
+            {% endfor %}
+            <tr id="1">
+                <td><p style="text-align: end;font-weight: 800;">Total</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['hsn_taxable_total'] }}</p></td>
+                <td><p></p></td>
+                <td><p style="text-align: end;font-weight: 800;">{{ invoice_package['total_tax_amount'] / 2 }}</p></td>
+                <td><p></p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_tax_amount'] / 2 }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_tax_amount'] }}</p></td>
+            </tr>
+        </table>
+    {% else %}
+        <table id="hsn_sac" cellpadding="0" cellspacing="0"
+               style="width: 100%; border-collapse: collapse; height: 12px;">
+            <tr id="1">
+                <th rowspan="2" style=" width:40%; color:grey; vertical-align: middle;"> HSN/SAC</th>
+                <th rowspan="2" style="width:15%; color:grey; vertical-align: middle;"> Taxable</th>
+                <th colspan="2" style="width:30%; color:grey;"> Integrated Tax</th>
+                <th rowspan="2" style="width:25%; color:grey; vertical-align: middle;"> Total <br>Tax Amount</th>
+            </tr>
+            <tr id="1">
+                <th style="width:15%; color:grey;"> Rate</th>
+                <th style="width:15%; color:grey;"> Amount</th>
+
+            </tr>
+            {% for x in invoice_package['hsn_list'] %}
+                <tr id="1">
+                    <td><p>{{ x }}</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][0] }}</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][4] }}%</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][2] }}</p></td>
+                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][3] }}</p></td>
+                </tr>
+            {% endfor %}
+            <tr id="1">
+                <td><p style="text-align: end; font-weight: 800;">Total</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['hsn_taxable_total'] }}</p></td>
+                <td><p></p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_tax_amount'] }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_tax_amount'] }}</p></td>
+            </tr>
+        </table>
+
+    {% endif %}
+    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+        <tr>
+            <td style="border-bottom: none; border-top: none;"><p style="font-weight: 800; padding-top: 8px;"><span
+                    style="color:grey; font-weight: normal;">Amount Chargeable (in words) : </span>INR {{ invoice_package['tax_words'] }}
+                Only</p></td>
+        </tr>
+    </table>
+</div>
+<div class="row" style="margin-bottom: 0px; border-left:1px solid black; border-right:1px solid black;  ">
+    <div class="col l12" style="padding-left: 8px;">
+        <div class="col l6" style="padding: 0">
+            <p><br>
+                <br><span style="color: grey;">Company's Pan :</span><span id="pan_no"
+                                                                           style="font-weight: 800;">{{ invoice_package['company'].gstin[2:12] }}</span>
+                <br>
+                <br>
+            </p>
+        </div>
+        <div class="col l6" style="padding-bottom: 5px;">
+            <p><span style="color: grey;">Company Bank Details</span>
+                <br><span style="color: grey;">Bank Name           : </span><span id="bank_name"
+                                                                                  style="font-weight: 800">{{ invoice_package['company'].bank_name.upper() }}</span>
+                <br><span style="color: grey;">A/c No.             : </span><span id="ac_no"
+                                                                                  style="font-weight: 800">{{ invoice_package['company'].account_number.upper() }}</span>
+                <br><span style="color: grey;">Branch              : </span><span id="ifs"
+                                                                                  style="font-weight: 800">{{ invoice_package['company'].branch.upper() }}</span><span></span>
+                <br><span style="color: grey;">IFS Code            : </span><span id="ifs"
+                                                                                  style="font-weight: 800">{{ invoice_package['company'].ifsc.upper() }}</span><br><span></span>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row"
+     style="margin-bottom: 0px; border-left:1px solid black; border-right:1px solid black; border-bottom: 1px solid;">
+    <div class="col l12" style="padding-left: 8px; padding-right: 0px;">
+        <div class="col l6" style="padding: 0">
+            <p><br>
+                <br><span style="color: grey;">Declaration</span>
+                <br>We declare that this invoice shows the actual price of the goods described and that all particulars
+                are true and correct
+                <br>
+            </p>
+        </div>
+        <div class="col l6" style="border: 1px solid black; border-bottom: none; border-right: none;">
+            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+
+                <tr>
+                    <td style="border: none; text-align: center">for Shreenathji Enterprise</td>
+                </tr>
+                <tr>
+                    <td style="border:none; border-bottom: none; height: 14.8px;"></td>
+                </tr>
+                <tr>
+                    <td style="border:none; border-bottom: none; height: 14.8px;"></td>
+                </tr>
+                <tr>
+                    <td style="border: none;text-align: center;">Authorised Signatory</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+<p style="text-align: center">SUBJECT TO {{ invoice_package['company'].city.upper() }} JURISDICTION<br>This is a
+    Computer Generated Inovice</p>
+
+
+<script>
+    /*window.onafterprint = function(e){
+        $(window).off('mousemove', window.onafterprint);
+        console.log('Print Dialog Closed..');
+    };
+
+    window.print();
+
+    setTimeout(function(){
+        console.log("mouse_move")
+        $(window).on('mousemove', window.onafterprint);
+    }, 1);
+    /*
+    function loadOtherPage() {
+    console.log("ok");
+    $("iframe")                             // create a new iframe element
+        .hide()                               // make it invisible
+        .attr("src", ".html") // point the iframe to the page you want to print
+        .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+
+	    window.print();
+}*/
+    $(document).ready(function () {
+        var x=$(document).height();
+        var y=$(window).height();
+        console.log(x,y) ;
+        if(x>1100){
+            $('#words_table').attr('style','width: 100%; page-break-after: always; border-bottom: 1px solid black;')
+        }
+    });
+    function myFunction() {
+
+        $('#kk1').hide();
+        $('#kk2').hide();
+        window.print();
+        //loadOtherPage();
+        //window.onafterprint = afterPrint;
+     $("#change_for_transport").text("(Duplicate for Transport)");
+        $('#kk1').show();
+        $('#kk2').show()
+
+    }
+/*
+        (function() {
+
+    var beforePrint = function() {
+        console.log('Functionality to run before printing.');
+    };
+
+    var afterPrint = function() {
+        console.log('Functionality to run after printing');
+
+
+
+
+        setTimeout(function (){
+            window.print();
+    }, 10000);
+
+
+
+    };
+
+    if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addListener(function(mql) {
+            if (mql.matches) {
+                beforePrint();
+            } else {
+                afterPrint();
+            }
+        });
+    }
+
+    window.onbeforeprint = beforePrint;
+    window.onafterprint = afterPrint;
+
+
+}());*/
+</script>
+</body>
+</html>
