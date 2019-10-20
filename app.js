@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('hbs')
 const session = require('express-session');
@@ -13,9 +13,10 @@ require('./config/mongoose')
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-  console.log("db connected");
+  console.log("> db connected");
 });
 
+// routes
 const company = require('./routes/company')
 const mainRouter = require('./routes/index');
 const invoice = require('./routes/invoice');
@@ -23,6 +24,7 @@ const item = require('./routes/item');
 const party = require('./routes/party');
 const user = require('./routes/user');
 
+// express, structure define
 const app = express();
 
 // Define paths for Express config
@@ -63,7 +65,7 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: false
 }));
-app.use(cookieParser());
+// app.use(cookieParser());
 
 // routes
 app.use('/company', company);

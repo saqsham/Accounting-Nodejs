@@ -25,7 +25,8 @@
                                 <div class="logo">
                                     <h1>Easy Accounting</h1>
                                 </div>
-                                <p>Please fill out the form to register with us.</p>
+                                <p>Please fill out the form to register with us. </p> <br>
+                                <p class="color: red"> {{ regisForm }} </p>
                             </div>
                         </div>
                     </div>
@@ -33,7 +34,7 @@
                     <div class="col-lg-6 bg-white">
                         <div class="form d-flex align-items-center">
                             <div class="content">
-                                <form class="text-left" method="post" action="/user/postregister">
+                                <form class="text-left" method="post" action="/user/register">
                                     <div class="form-group-material">
                                         <input id="register-username" type="text" name="registerUsername" required data-msg="Please enter your username" class="input-material">
                                         <label for="register-username" class="label-material">Username</label>

@@ -27,6 +27,7 @@
                                     <!-- <h1>Dashboard</h1>-->
                                 </div>
                                 <p>If you are returning visitor, please provide your User Name and Password.</p>
+                                <p> {{ loginForm }} </p>
                             </div>
                         </div>
                     </div>
@@ -34,7 +35,7 @@
                     <div class="col-lg-6">
                         <div class="form d-flex align-items-center">
                             <div class="content">
-                                <form method="post" class="form-validate mb-4" action="/user/home" > 
+                                <form method="post" class="form-validate mb-4" action="/user/login" > 
                                     <div class="form-group">
                                         <input id="login-username" type="text" name="loginUsername" required data-msg="Please enter your username" class="input-material">
                                         <label for="login-username" class="label-material">User Name</label>
