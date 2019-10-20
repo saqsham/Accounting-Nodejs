@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Easy Accounting</title>
     <!--link href="//db.onlinewebfonts.com/c/527c5ab608cab860a6aae8ce02e14b0e?family=Calibri" rel="stylesheet" type="text/css"/-->
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/print_page.css') }}">
+    <link rel="stylesheet" href="css/print_page.css">
 
     <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
     <style>
@@ -28,7 +28,7 @@
     </div>
     <div class="col l6"></div>
     <div id="kk2" class="col l3">
-        <h4><a style="font-size: 20px;" href="{{ url_for('invoices.index') }}">Return to Invoices</a></h4>
+        <h4><a style="font-size: 20px;" href="/invoice/list">Return to Invoices</a></h4>
     </div>
 
     <div class="col l12">

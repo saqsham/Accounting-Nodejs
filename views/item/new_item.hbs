@@ -13,8 +13,8 @@
 
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('users.index') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Items</a></li>
+            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+            <li class="breadcrumb-item"><a href="/item/list">Items</a></li>
             <li class="breadcrumb-item active"><a href="#">New Item</a></li>
         </ul>
     </div>
@@ -25,7 +25,7 @@
                     <div class="block">
                         <div class="title"><strong>Basic Details</strong></div>
                         <div class="block-body">
-                            <form method="post" class="form-horizontal" action="{{ url_for('items.new_item') }}">
+                            <form method="post" class="form-horizontal" action="#">
                                 <div class="form-group row margin-row">
                                     <label for="model_name" class="col-sm-3 form-control-label">Model Name</label>
                                     <div class="col-sm-9">

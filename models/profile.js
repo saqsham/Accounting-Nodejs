@@ -1,10 +1,11 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const Schema = mongoose.Schema;
 
-const ProfileSchema = new mongoose.Schema({
-    registerUsername: {type:String,trim:true ,default:''},
-    registerEmail: {type: String, trim: true, default:''},
-    registerPassword: {type: String,trim:true ,default:''}
+const ProfileSchema = new Schema({
+    registerUsername: {type: String, trim:true ,default: ''},
+    registerEmail: {type: String, trim: true, default: ''},
+    registerPassword: {type: String, trim:true ,default: ''}
 })
 
 //authenticate input against database

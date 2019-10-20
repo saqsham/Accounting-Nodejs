@@ -6,8 +6,6 @@
         </div>
     </div>
 </footer>
-</div>
-</div>
 <!-- JavaScript files-->
 
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -48,12 +46,33 @@
     }); --}}
 
 
-{{! #if invoice }}
-<script src = "js/page/invoices.js" ></script>
-{{! /if}}
 
 {{!#if_eq website 'company' }}
 <script src="js/page/parties.js"></script>
+{{! /if_eq}}
+
+{{! #if new_invoice }}
+<script src = "js/page/invoices.js" ></script>
+{{! /if}}
+
+{{! #if edit_invoice }}
+<script src = "js/page/edit_invoice.js" ></script>
+{{! /if}}
+
+{{! #if list_invoice }}
+<script src = "js/page/invoice_pagetable.js" ></script>
+{{! /if}}
+
+{{! #if serial_list_invoice }}
+<script src = "js/page/serial_no_pagetable.js" ></script>
+{{! /if}}
+
+{{!#if_eq website 'list item' }}
+<script src="js/page/item_pagetable.js"></script>
+{{! /if_eq}}
+
+{{!#if_eq website 'new item list' }}
+<script src="js/page/items.js"></script>
 {{! /if_eq}}
 
 {{!#if_eq website 'new party' }}
@@ -64,13 +83,6 @@
 <script src="js/page/party_pagetable.js"></script>
 {{! /if_eq}}
 
-{{!#if_eq website 'item list' }}
-<script src="js/page/item_pagetable.js"></script>
-{{! /if_eq}}
-
-{{!#if_eq website 'new item list' }}
-<script src="js/page/items.js"></script>
-{{! /if_eq}}
 
 
 <script>

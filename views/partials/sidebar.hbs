@@ -14,10 +14,10 @@
             <!-- Sidebar Navidation Menus-->
             <span class="heading">Main</span>
             <ul class="list-unstyled">
-                <li> <a href="#" class="color_expan "> <i class="icon-home "></i>Home</a></i>
+                <li> <a href="/home" class="color_expan "> <i class="icon-home "></i>Home</a></i>
             </ul>
             <ul class="list-unstyled ">
-                <li> <a href="/company"> <i class="icon-presentation "></i>Company</a></li>
+                <li> <a href="/company/edit"> <i class="icon-presentation "></i>Company</a></li>
             </ul>
             <ul class="list-unstyled ">
                 <li data-toggle="modal " data-target="#database "> <a href="# "> <i class="icon-cloud "></i>Database</a>
@@ -26,12 +26,12 @@
             <span class="heading ">Masters</span>
             <ul class="list-unstyled ">
 
-
-                <li><a href="#exampledropdownDropdown0 " aria-expanded="false " data-toggle="collapse ">
-                        <i class="icon-padnote "></i>Items</a>
-                    <ul id="exampledropdownDropdown0 " class="collapse list-unstyled ">
-                        <li> <a href="/item"> Create</a></li>
-                        <li><a href="#">List</a> </li>
+                 <li>
+                    <a href="#exampledropdownDropdown0" data-toggle="collapse" aria-expanded="false">
+                        <i class="icon-padnote"></i>Items</a>
+                    <ul id="exampledropdownDropdown0" class="collapse list-unstyled ">
+                        <li><a href="/item/new">Create</a></li>
+                        <li><a href="/item/list">List</a></li>
                     </ul>
                 </li>
 
@@ -39,8 +39,8 @@
                     <a href="#exampledropdownDropdown1" data-toggle="collapse" aria-expanded="false">
                         <i class="icon-padnote"></i>Party</a>
                     <ul id="exampledropdownDropdown1" class="collapse list-unstyled ">
-                        <li><a href="/party">Create</a></li>
-                        <li><a href="#">List</a></li>
+                        <li><a href="/party/new">Create</a></li>
+                        <li><a href="/party/list">List</a></li>
                     </ul>
                 </li>
             </ul>
@@ -49,13 +49,13 @@
             <span class="heading" style="margin-top: 15px;">Invoice</span>
             <ul class="list-unstyled">
                 <li>
-                    <a href="#"> <i class="icon-chart"></i>Create</a>
+                    <a href="/invoice/new"> <i class="icon-chart"></i>Create</a>
                 </li>
                 <li>
-                    <a href="#"> <i class="icon-chart"></i>List </a>
+                    <a href="/invoice/list"> <i class="icon-chart"></i>List </a>
                 </li>
                 <li>
-                    <a href="#"> <i class="icon-chart"></i>Serial No. List</a>
+                    <a href="/invoice/serialList"> <i class="icon-chart"></i>Serial No. List</a>
                 </li>
             </ul>
         </nav>

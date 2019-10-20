@@ -16,7 +16,11 @@ db.once('open', function () {
   console.log("db connected");
 });
 
+const company = require('./routes/company')
 const mainRouter = require('./routes/index');
+const invoice = require('./routes/invoice');
+const item = require('./routes/item');
+const party = require('./routes/party');
 const user = require('./routes/user');
 
 const app = express();
@@ -47,7 +51,12 @@ hbs.registerPartials(partialsPath)
 
 // setup static directory to serve
 app.use(express.static(publicDirectoryPath))
+app.use('/company', express.static(publicDirectoryPath))
+app.use('/invoice', express.static(publicDirectoryPath))
+app.use('/item', express.static(publicDirectoryPath))
+app.use('/party', express.static(publicDirectoryPath))
 app.use('/user', express.static(publicDirectoryPath))
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -57,7 +66,11 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 
 // routes
+app.use('/company', company);
 app.use('/', mainRouter);
+app.use('/invoice', invoice);
+app.use('/item', item);
+app.use('/party', party);
 app.use('/user', user);
 
 // // catch 404 and forward to error handler
