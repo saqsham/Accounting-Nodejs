@@ -8,7 +8,7 @@ const ProfileSchema = new Schema({
     registerPassword: {type: String, trim:true ,default: ''}
 })
 
-//authenticate input against database
+//creating function to authenticate input against database
 ProfileSchema.statics.authenticate = function (username, password, callback) {
     Profile.findOne({ registerUsername: username })
       .exec(function (err, user) {

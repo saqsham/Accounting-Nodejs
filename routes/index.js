@@ -6,15 +6,15 @@ router.get('/home', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-  res.render('pages/index', {website: "index"});
+  res.render('pages/index', {title: "index"});
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('pages/login', {website: "login"});
+  res.render('pages/login', {title: "login"});
 });
 
 router.get('/register', function(req, res, next) {
-  res.render('pages/register', {website: "register"});
+  res.render('pages/register', {title: "register"});
 });
 
 module.exports = router;

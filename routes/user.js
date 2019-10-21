@@ -7,16 +7,17 @@ router.post('/register', function (req, res, next) {
 		if (err) {
 			console.log(err);
 		}
-		// var message;
 		if (user) {
-			res.render('./pages/register', {regisForm: "Error: user already exists"});
+			res.render('./pages/register', {regisForm: "Error: user already exists"}); // this works
+			// res.redirect(301, '../register', {regisForm: "Error: user already exists"}); // doesn not works
+			// res.redirect(301, '..register');
 		} else {
 			Profile.findOne({registerEmail: req.body.registerEmail}, function(err, mail){
 				if (err) {
 					console.log(err);
 				}
 				if (mail) {
-					res.redirect('../register', {regisForm: "Error: mail already registered"});
+					res.render('./pages/register', {regisForm: "Error: mail already registered"});
 				} else {
 					const userData = {
 						registerEmail: req.body.registerEmail,
@@ -43,11 +44,7 @@ router.post('/login', function (req, res, next) {
 	if (req.body.loginUsername && req.body.loginPassword) {
 		Profile.authenticate(req.body.loginUsername, req.body.loginPassword, function (error, user) {
 			if (error || !user) {
-				// const err = new Error('Wrong email or password.');
-				// err.status = 401;
-				// return next(err);
-				res.redirect('../login', {loginForm: "Error: Wrong email or passwaord"});
-
+				res.render('./pages/login', {loginForm: "Error: Wrong email or passwaord"});
 			} else {
 				req.session.userId = user._id;
 				Profile.findById(req.session.userId)

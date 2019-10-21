@@ -151,31 +151,31 @@ function check_gst(gst){
         //alert("Invalid Length of GSTIN");
         return "Invalid Length of GSTIN";
     }else{
-        var state = parseInt(gst.substring(0, 2));
-        // FIRST 2 CHARACTERS STATE CODE
-        if(state < 1 || state > 37){
-            //alert("Invalid First Two Characters of GSTIN");
+        // var state = parseInt(gst.substring(0, 2));
+        // // FIRST 2 CHARACTERS STATE CODE
+        // if(state < 1 || state > 37){
+        //     //alert("Invalid First Two Characters of GSTIN");
 
-            return "Invalid First Two Characters of GSTIN";
-        }
-        // NEXT 10 CHARACTERS PAN NO. VALIDATION
-        var pan = gst.substring(2, 12).toUpperCase();
-        var regex = /[a-zA-Z]{3}[PCHFATBLJG]{1}[a-zA-Z]{1}[0-9]{4}[a-zA-Z]{1}$/;
-        if( !regex.test(pan) ){
-           // alert("Invalid GSTIN");
-            return "Invalid PAN No. in GSTIN";
-        }
-        // DEFAULT 14TH CHARACTER 'Z'
-        var char14 = gst[13].toUpperCase();
-        if(char14 != "Z"){
-            //alert("14th character of GSTIN should be 'Z'");
-            return "14th character of GSTIN should be 'Z'";
-        }
-        // CHECKSUM DIGIT
-        if(check_gst_checksum(gst.substring(0, 14)) != gst[14]){
-           // alert("Invalid GSTIN");
-            return "Invalid GSTIN checksum doesn't match";
-        }
+        //     return "Invalid First Two Characters of GSTIN";
+        // }
+        // // NEXT 10 CHARACTERS PAN NO. VALIDATION
+        // var pan = gst.substring(2, 12).toUpperCase();
+        // var regex = /[a-zA-Z]{3}[PCHFATBLJG]{1}[a-zA-Z]{1}[0-9]{4}[a-zA-Z]{1}$/;
+        // if( !regex.test(pan) ){
+        //    // alert("Invalid GSTIN");
+        //     return "Invalid PAN No. in GSTIN";
+        // }
+        // // DEFAULT 14TH CHARACTER 'Z'
+        // var char14 = gst[13].toUpperCase();
+        // if(char14 != "Z"){
+        //     //alert("14th character of GSTIN should be 'Z'");
+        //     return "14th character of GSTIN should be 'Z'";
+        // }
+        // // CHECKSUM DIGIT
+        // if(check_gst_checksum(gst.substring(0, 14)) != gst[14]){
+        //    // alert("Invalid GSTIN");
+        //     return "Invalid GSTIN checksum doesn't match";
+        // }
 
         return true;
 
