@@ -2,15 +2,15 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 
-const ProfileSchema = new Schema({
+const UserSchema = new Schema({
     registerUsername: {type: String, trim:true ,default: ''},
     registerEmail: {type: String, trim: true, default: ''},
     registerPassword: {type: String, trim:true ,default: ''}
 })
 
 //creating function to authenticate input against database
-ProfileSchema.statics.authenticate = function (username, password, callback) {
-    Profile.findOne({ registerUsername: username })
+UserSchema.statics.authenticate = function (username, password, callback) {
+    User.findOne({ registerUsername: username })
       .exec(function (err, user) {
         if (err) {
           return callback(err)
@@ -30,7 +30,7 @@ ProfileSchema.statics.authenticate = function (username, password, callback) {
   }
 
 //hashing a password before saving it to the database
-ProfileSchema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
     const user = this;
     bcrypt.hash(user.registerPassword, 10, function (err, hash) {
       if (err) {
@@ -41,5 +41,5 @@ ProfileSchema.pre('save', function (next) {
     })
   });
 
-const Profile = mongoose.model('Profile', ProfileSchema);
-module.exports = Profile;
+const User = mongoose.model('User', UserSchema);
+module.exports = User;
