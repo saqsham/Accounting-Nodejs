@@ -1,3 +1,4 @@
+
 <footer class="footer">
     <div class="footer__block block no-margin-bottom">
         <div class="container-fluid text-center">
@@ -6,18 +7,19 @@
         </div>
     </div>
 </footer>
+
 <!-- JavaScript files-->
 
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="js/custom.js"></script>
-<script src="vendor/popper.js/umd/popper.min.js"></script>
+<script src="vendor/popper.js/umd/popper.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="vendor/jquery.cookie/jquery.cookie.js"></script>
 <script src="vendor/chart.js/Chart.min.js"></script>
 <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="js/charts-home.js"></script>
 <script src="js/front.js"></script>
-<script src="js/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="js/bootstrap-select/bootstrap-select.js"></script>
 <script src="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
 {{!-- 
@@ -46,7 +48,7 @@
     }); --}}
 
 
-
+<!--
 {{!#if_eq website 'company' }}
 <script src="js/page/parties.js"></script>
 {{! /if_eq}}
@@ -82,11 +84,29 @@
 {{!#if_eq website 'party list' }}
 <script src="js/page/party_pagetable.js"></script>
 {{! /if_eq}}
-
-
+-->
+{{#if company_page}}
+<script src="DataTables/datatables.min.js"></script>
+<script src="js/page/company_pagetable.js"></script>
+{{/if}}
 
 <script>
     $(document).ready(function(){
+          $.ajax({
+    url: '/company/getcompanies',
+    method: 'GET',
+    }).done(function(res) {
+        if (res.success) {
+        console.log('id from ajax call is', res.companies);
+        var x = '';
+        res.companies.forEach(function(company){
+            x+='<a id="'+company._id+'" rel="nofollow" href="#" class="dropdown-item company_click"><span>'+company.name+'</span></a>';
+        });
+        $('#all_companies').append(x)
+    } else {
+        console.log('error...ajax');
+    }
+});
 
 $('.database_date').datetimepicker({
       minView: 2,
@@ -95,6 +115,28 @@ $('.database_date').datetimepicker({
     autoclose:true,
     });
 });
+
+$(document).on('click', '.company_click',function(){
+    console.log('click');
+    const id = $(this).attr('id');
+    console.log(id);
+    $.ajax({
+        url: '/company/select',
+        method: 'GET',
+        data: { companyId: id }
+        }).done(function(res) {
+            if (res.success) {
+            console.log('id from ajax call is', res.companyName);
+            //window.location.reload();
+            $('#companyName').html(res.companyName);
+            console.log("done");
+            //window.location.reload(true);
+            
+        } else {
+            console.log('error...ajax');
+            }
+});
+})
 </script>
 
 </body>

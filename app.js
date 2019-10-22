@@ -16,6 +16,14 @@ db.once('open', function () {
   console.log("> db connected");
 });
 
+// express, structure define
+const app = express();
+
+// Define paths for Express config
+const publicDirectoryPath = path.join(__dirname, './public')
+const viewsPath = path.join(__dirname, './views/')
+const partialsPath = path.join(__dirname, './views/partials/')
+
 // routes
 const company = require('./routes/company')
 const mainRouter = require('./routes/index');
@@ -24,13 +32,6 @@ const item = require('./routes/item');
 const party = require('./routes/party');
 const user = require('./routes/user');
 
-// express, structure define
-const app = express();
-
-// Define paths for Express config
-const publicDirectoryPath = path.join(__dirname, './public')
-const viewsPath = path.join(__dirname, './views/')
-const partialsPath = path.join(__dirname, './views/partials/')
 
 //use sessions for tracking logins
 

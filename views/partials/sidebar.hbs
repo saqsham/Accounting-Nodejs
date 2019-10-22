@@ -1,4 +1,5 @@
-    <div class="d-flex align-items-stretch">
+
+        <div class="d-flex align-items-stretch">
         <!-- Sidebar Navigation-->
         <nav id="sidebar">
             <!-- Sidebar Header-->
@@ -14,10 +15,17 @@
             <!-- Sidebar Navidation Menus-->
             <span class="heading">Main</span>
             <ul class="list-unstyled">
-                <li> <a href="/home" class="color_expan "> <i class="icon-home "></i>Home</a></i>
+                <li> <a href="/home" class="color_expan "> <i class="icon-home "></i>Home</a></li>
             </ul>
             <ul class="list-unstyled ">
-                <li> <a href="/company/edit"> <i class="icon-presentation "></i>Company</a></li>
+                <li>
+                <a href="#exampledropdownDropdown2" data-toggle="collapse" aria-expanded="false">
+                <i class="icon-padnote"></i>Companies</a>
+                <ul id="exampledropdownDropdown2" class="collapse list-unstyled ">
+                    <li><a href="/company/new">Create</a></li>
+                    <li><a href="/company/list">List</a></li>
+                </ul>
+            </li>
             </ul>
             <ul class="list-unstyled ">
                 <li data-toggle="modal " data-target="#database "> <a href="# "> <i class="icon-cloud "></i>Database</a>
