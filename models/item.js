@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
     companyId: {type: String, trim: true ,default: ''},
-    modelName: {type: String, trim: true ,default: ''},
+    newModelName: {type: String, trim: true ,default: ''},
     companyName: {type: String, trim: true, default: ''},
     hsn: {type: String, trim:true ,default: ''},
     itemType: {type: String, trim: true ,default: ''},
