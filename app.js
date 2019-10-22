@@ -33,6 +33,10 @@ const viewsPath = path.join(__dirname, './views/')
 const partialsPath = path.join(__dirname, './views/partials/')
 
 //use sessions for tracking logins
+
+
+//check in db
+
 app.use(session({
     secret: 'work hard',
     resave: true,
@@ -42,9 +46,9 @@ app.use(session({
     })
 }));
 
-// // parse incoming requests
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
+// parse incoming requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // view engine setup
 app.set('views', viewsPath);
