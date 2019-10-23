@@ -62,6 +62,10 @@ app.use('/user', express.static(publicDirectoryPath))
 app.use('/company/edit', express.static(publicDirectoryPath))
 app.use('/company/delete', express.static(publicDirectoryPath))
 
+app.use('/party/edit', express.static(publicDirectoryPath))
+app.use('/party/delete', express.static(publicDirectoryPath))
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
