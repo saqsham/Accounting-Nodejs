@@ -28,7 +28,7 @@
                                 <div class="form-group row margin-row">
                                     <label for="model_name" class="col-sm-3 form-control-label">Model Name</label>
                                     <div class="col-sm-9">
-                                        <input id="model_name" name="modelName" type="text" class="form-control" required>
+                                        <input id="model_name" name="newModelName" type="text" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="line"></div>
@@ -42,9 +42,9 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-7 div_select new_company_check" id="div_select_company">
-                                        <select id="company_name" name="companyName"
+                                        <select id="company_name" name=""
                                             class="select_id new_company_check form-control mb-3 mb-3 selectpicker"
-                                            data-live-search="true" title="Select Company" required>
+                                            data-live-search="true" title="Select Company">
                                             <option value="" disabled selected data-token="option 1">Select Company
                                             </option>
                                             {{!-- {% for company in companies %}
@@ -60,7 +60,7 @@
                                     </div>
                                     <!--label class="col-sm-2 form-control-label">AddCompany name Name</label-->
                                     <div id="add_company" class="div_add col-sm-7 new_company_check">
-                                        <input id="add_new_company" name="newCompany" placeholder="Add New Company"
+                                        <input id="add_new_company" name="companyName" placeholder="Add New Company"
                                             type="text" class="add_new form-control new_company_check" required>
                                         <!--small class="help-block-none">Add New Company</small-->
                                     </div>
@@ -85,7 +85,7 @@
                                     <div class="col-sm-7 div_select new_item_check" id="div_select_company">
                                         <select id="type" name="type"
                                             class="select_id form-control mb-3 mb-3 selectpicker new_item_check"
-                                            data-live-search="true" required>
+                                            data-live-search="true" >
                                             <option value="0" disabled selected data-token="option 1">Select Type
                                             </option>
                                             {{!-- {% for type in types %}
@@ -100,7 +100,7 @@
                                     </div>
                                     <!--label class="col-sm-2 form-control-label">AddCompany name Name</label-->
                                     <div id="add_company" class="div_add col-sm-7 new_item_check">
-                                        <input id="add_new_type" name="addItem" required type="text"
+                                        <input id="add_new_type" name="itemType" required type="text"
                                             placeholder="Add new type" class="add_new form-control new_item_check">
                                         <!--small class="help-block-none">Add New Item</small-->
                                     </div>

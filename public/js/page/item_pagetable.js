@@ -3,16 +3,16 @@ function setupData() {
         $('#item').DataTable({
             "ajax": {
                 // "url": "static/objects2.txt", // This works for the static file
-                "url": "index_get_data", // This now works too thanks to @kthorngren
+                "url": "/item/getitemforlist", // This now works too thanks to @kthorngren
                 "dataType": "json",
                 "dataSrc": "data",
                 "contentType":"application/json"
             },
             "columns": [
-                {"data": "model_name"},
-                {"data": "company"},
+                {"data": "newModelName"},
+                {"data": "companyName"},
                 {"data": "hsn"},
-                {"data": "item_type"},
+                {"data": "itemType"},
                 {"data": "tax"},
                 {"data": "price"},
                 {"data": "actions"},

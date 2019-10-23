@@ -43,9 +43,9 @@ app.use(session({
     })
 }));
 
-// parse incoming requests
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// // parse incoming requests
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 // view engine setup
 app.set('views', viewsPath);
