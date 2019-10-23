@@ -6,7 +6,7 @@
     <!-- Page Header-->
     <div class="page-header no-margin-bottom">
         <div class="container-fluid">
-            <h2 class="h5 no-margin-bottom">Invoice Creation</h2>
+            <h2 class="h5 no-margin-bottom">Edit Sales Party</h2>
         </div>
     </div>
     <!-- Breadcrumb-->
@@ -14,8 +14,8 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="/home">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Company</a></li>
-            <li class="breadcrumb-item active">Edit Company</li>
+            <li class="breadcrumb-item"><a href="#">Sales Parties</a></li>
+            <li class="breadcrumb-item active">New Sales Party</li>
         </ul>
     </div>
     <section class="no-padding-top">
@@ -27,30 +27,18 @@
                         <div class="title"><strong>Basic Details</strong></div>
                         <div class="block-body">
                             <form class="form-horizontal" method="post">
-                                <div class="row">
-                                    <label class="col-sm-3 form-control-label">Material Inputs</label>
+                                <div class="form-group row margin-row">
+                                    <label for="name" class="col-sm-3 form-control-label">Name</label>
                                     <div class="col-sm-9">
-                                        <div class="form-group-material">
-                                            <input id="name" type="text" name="name" required class="input-material"
-                                                value="{{ company.name }}">
-                                            <label for="name" class="label-material active">Name of Company</label>
-                                        </div>
-                                        <div class="form-group-material">
-                                            <input id="email" type="email" name="email" required class="input-material"
-                                                value="{{ company.email }}">
-                                            <label for="email" class="label-material active">Email Address </label>
-                                        </div>
+                                        <input id="name" name="name" type="text" class="form-control" required value="{{party.name}}">
                                     </div>
                                 </div>
+                                <div class="line"></div>
 
-                                <div class="line"></div>
-                                <div class="title"><strong>Goods and Services Taxpayer Information</strong></div>
-                                <div class="line"></div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 form-control-label">GSTIN</label>
                                     <div class="col-sm-9">
-                                        <input id="gstin" name="gstin" type="text" class="form-control"
-                                            value="{{ company.gstin }}" required>
+                                        <input id="gstin" name="gstin" type="text" class="form-control" required value="{{party.gstin}}">
                                         <small id="test1" class="help-block-none"
                                             style="color: red;padding: 0 0 0 5px;margin-top: 0px; font-size: 90%; font-weight: 501;">
                                             GSTIN is requied
@@ -59,51 +47,53 @@
                                 </div>
                                 <div class="line"></div>
 
-                                <div class="line"></div>
-                                <div class="title"><strong>Address of Headquaters</strong></div>
-                                <div class="line"></div>
                                 <div class="row">
                                     <label class="col-sm-3 form-control-label">Address</label>
                                     <div class="col-sm-9">
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <div class="form-group-material">
-                                                    <input id="address" type="text" name="address"
-                                                        class="input-material" value="{{ company.address }}" required>
-                                                    <label for="address" class="label-material">Local
+                                                    <input id="local_address" type="text" name="address" value="{{party.address}}"
+                                                        class="input-material" required>
+                                                    <label for="local_address" class="label-material">Local
                                                         Address</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group-material">
-                                                    <input id="city" type="text" name="city" class="input-material"
-                                                        value="{{ company.city }}" required>
-                                                    <label for="city" class="label-material active">City</label>
+                                                    <input id="city" type="text" name="city" class="input-material" value="{{party.city}}"
+                                                        required>
+                                                    <label for="city" class="label-material">City</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-
+                                            <!--div class="col-md-4">
+                                              <div class="form-group-material">
+                                                  <input id="register-username" type="text" name="username" required
+                                                         class="input-material">
+                                                  <label for="register-username" class="label-material">City</label>
+                                              </div>
+                                            </div-->
 
                                             <div class="col-md-4">
                                                 <div class="form-group-material">
-                                                    <input id="pincode" type="text" name="pincode"
-                                                        class="input-material" value="{{ company.pincode }} " required>
-                                                    <label for="pincode" class="label-material active">PINCODE</label>
+                                                    <input id="pincode" type="text" name="pincode" value="{{party.pincode}}"
+                                                        class="input-material" required>
+                                                    <label for="pincode" class="label-material">PINCODE</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group-material">
-                                                    <input id="state" type="text" name="state" class="input-material"
-                                                        value="{{ company.state }}" readonly>
-                                                    <label for="state" class="label-material active">State</label>
+                                                    <input id="state" type="text" name="state" required value="{{party.state}}"
+                                                        class="input-material" readonly>
+                                                    <label for="state" class="label-material">State</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group-material">
-                                                    <input id="country" type="text" name="country" required
-                                                        class="input-material active" value="India"
-                                                        aria-required="true">
+                                                    <input id="country" type="text" name="country" required value="{{party.country}}"
+                                                        class="input-material" value="India">
                                                     <label for="country" class="label-material">Country</label>
                                                 </div>
                                             </div>
@@ -114,57 +104,51 @@
 
 
                                 <div class="line"></div>
-                                <div class="title"><strong>Bank Account Information</strong></div>
+                                <div class="title"><strong>Contact Information</strong></div>
                                 <div class="line"></div>
 
-
                                 <div class="row">
-                                    <label class="col-sm-3 form-control-label">Bank Details</label>
+                                    <label class="col-sm-3 form-control-label">Material Inputs</label>
+                                    <div class="col-sm-9">
+                                        <div class="form-group-material">
+                                            <input id="contact_person_name" type="text" name="contactPersonName"  value="{{party.contactPersonName}}"
+                                                required class="input-material">
+                                            <label for="contact_person_name" class="label-material">Name of Contact
+                                                Person</label>
+                                        </div>
+                                        <div class="form-group-material">
+                                            <input id="email" type="email" name="email" required class="input-material" value="{{party.email}}">
+                                            <label for="email" class="label-material">Email Address </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+
+                                <div class="line"></div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Contact No.</label>
                                     <div class="col-sm-9">
                                         <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group-material">
-                                                    <input id="bank_name" type="text" name="bank_name"
-                                                        class="input-material" value="{{ company.bank_name }}" required>
-                                                    <label for="bank_name" class="label-material active">Bank
-                                                        Name</label>
-                                                </div>
+                                            <div class="col-md-6">
+                                                <input id="mobile_no_1" name="mobileNumber" type="text" value="{{party.mobileNumber}}"
+                                                    placeholder="Mobile Number" class="form-control" required>
                                             </div>
-
-                                            <div class="col-md-12">
-                                                <div class="form-group-material">
-                                                    <input id="branch" type="text" name="branch" class="input-material"
-                                                        value="{{ company.branch }}" required>
-                                                    <label for="branch" class="label-material active">Branch</label>
-                                                </div>
-                                                <div class="row">
-
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group-material">
-                                                            <input id="account_number" type="text" name="account_number"
-                                                                class="input-material"
-                                                                value="{{ company.account_number }}" required>
-                                                            <label for="account_number"
-                                                                class="label-material active">Account
-                                                                Number</label>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <input type="checkbox" class="checkbox-template">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group-material">
-                                                            <input id="ifsc" type="text" name="ifsc"
-                                                                class="input-material" value="{{ company.ifsc }}"
-                                                                required>
-                                                            <label for="ifsc" class="label-material active">IFS
-                                                                Code</label>
-                                                        </div>
-                                                    </div>
+                                                    <input id="mobile_no_2" name="altMobileNumber" type="text" value="{{party.altMobileNumber}}"
+                                                        class="form-control" placeholder="Alternate Contact No.">
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="line"></div>
                                 <div class="form-group row">
                                     <div class="col-sm-9 ml-auto">
@@ -172,7 +156,6 @@
                                         <button type="submit" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -180,5 +163,6 @@
             </div>
         </div>
     </section>
+
 
     {{> footer }}

@@ -3,7 +3,7 @@ function setupData() {
         $('#party').DataTable({
             "ajax": {
                 // "url": "static/objects2.txt", // This works for the static file
-                "url": "index_get_data", // This now works too thanks to @kthorngren
+                "url": "/party/getpartyforlist", // This now works too thanks to @kthorngren
                 "dataType": "json",
                 "dataSrc": "data",
                 "contentType":"application/json"
@@ -12,8 +12,8 @@ function setupData() {
                 {"data": "name"},
                 {"data": "city"},
                 {"data": "gstin"},
-                {"data": "contact_person_name"},
-                {"data": "mobile_no"},
+                {"data": "contactPersonName"},
+                {"data": "mobileNumber"},
                 {"data": "email"},
                 {"data": "actions"},
             ]
