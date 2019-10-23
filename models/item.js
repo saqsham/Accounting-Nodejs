@@ -2,10 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
+    companyId: {type: String, trim: true ,default: ''},
     newModelName: {type: String, trim: true ,default: ''},
-    newCompany: {type: String, trim: true, default: ''},
+    companyName: {type: String, trim: true, default: ''},
     hsn: {type: String, trim:true ,default: ''},
-    newItem: {type: String, trim: true ,default: ''},
+    itemType: {type: String, trim: true ,default: ''},
     tax: {type: Number, trim: true ,default: ''},
     price: {type: Number, trim: true ,default: ''},
 })
