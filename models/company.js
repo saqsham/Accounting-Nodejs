@@ -43,6 +43,41 @@ CompanySchema.statics.findByUserId = async (userid)=> {
     return companies
 }
 
+
+CompanySchema.statics.updatecompany = async (companyid, data) => {
+  try{
+    //console.log("inside function",companyid,typeof data)
+    const res = await Company.updateOne({_id: companyid}, data)
+  
+    if(!res){
+      throw newError('No company with given id')
+    }
+
+    return true
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
+}
+
+CompanySchema.statics.deletecompany = async (_id) => {
+  try{
+    //console.log("inside function",companyid,typeof data)
+    const res = await Company.findByIdAndDelete(_id)
+  
+    if(!res){
+      throw newError('No company with given id')
+    }
+
+    return true
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
+}
+
 const Company = mongoose.model('Company', CompanySchema);
 module.exports = Company;
 

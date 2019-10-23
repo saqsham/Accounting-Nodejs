@@ -3,7 +3,7 @@ const router = express.Router();
 const Company = require('../models/company')
 const auth = require('../middleware/auth')
 
-
+/*
 router.get('/edit', function(req, res, next) {
     Company.findOne().sort({ _id: -1}).limit(1)
             .exec(function (err, data) {
@@ -24,7 +24,7 @@ router.get('/edit', function(req, res, next) {
                 });
             });
 });
-  
+  */
 
 router.post('/edit', function (req, res, next) {
     const companyData = new Company ({
@@ -71,7 +71,7 @@ router.post('/edit', function (req, res, next) {
 });
 
 router.get('/new', auth.isAuthorized,function(req, res, next) {
-    res.render('company/add_company', {userName: req.session.username, companyName:req.session.companyName, newcompany: true});
+    res.render('company/new', {userName: req.session.username, companyName:req.session.companyName, newcompany: true});
 });
 
 router.get('/list', auth.isAuthorized,function(req, res, next) {
@@ -128,7 +128,7 @@ router.get('/getcompanyforlist',async (req,res) =>{
         companies.forEach(function(company){
             console.log(typeof company)
             //company = JSON.stringify(company)
-            x = "<td><div class=\"dropdown-content\"><a id=\"navbarDropdownMenuLink"+company._id+"\" href=\"#\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class=\"nav-link tasks-toggle\"><i class=\"icon-new-file\"></i></a><div aria-labelledby=\"navbarDropdownMenuLink"+company._id+"\" class=\"invoice_datatable dropdown-menu tasks-list\"><a href=\"/parties/edit/"+company._id+"\" class=\"dropdown-item\"><div class=\"text d-flex justify-content-between\"><strong><i class=\"fa fa-pencil fa-fw\"></i>  Edit</strong></div></a><a     data-href=\"/companies/delete/"+company._id+"\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"dropdown-item\"><div class=\"text d-flex justify-content-between\"><strong><i class=\"fa fa-trash-o fa-fw\"></i>  Delete</strong></div></a></div></div></td>"
+            x = "<td><div class=\"dropdown-content\"><a id=\"navbarDropdownMenuLink"+company._id+"\" href=\"#\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class=\"nav-link tasks-toggle\"><i class=\"icon-new-file\"></i></a><div aria-labelledby=\"navbarDropdownMenuLink"+company._id+"\" class=\"company_datatable dropdown-menu tasks-list\"><a href=\"/company/edit/"+company._id+"\" class=\"dropdown-item\"><div class=\"text d-flex justify-content-between\"><strong><i class=\"fa fa-pencil fa-fw\"></i>  Edit</strong></div></a><a     data-href=\"/company/delete/"+company._id+"\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"dropdown-item\"><div class=\"text d-flex justify-content-between\"><strong><i class=\"fa fa-trash-o fa-fw\"></i>  Delete</strong></div></a></div></div></td>"
             //console.log(x)
             //company["actions"] = x
 
@@ -152,4 +152,41 @@ router.get('/getcompanyforlist',async (req,res) =>{
         console.log(e)
     }
 })
+
+router.get('/edit/:id', async (req,res) =>{
+    var _id = req.params.id
+    try{
+        const companyd = await Company.findById(_id)
+        console.log(companyd)
+        res.render('company/edit',{userName: req.session.username, companyName:req.session.companyName, company_page:true, company:companyd});
+    }
+    catch(e){
+        console.log(e)
+    }
+})
+
+router.post('/edit/:id', async (req,res) =>{
+    var _id = req.params.id
+    try{
+        const data = await Company.updatecompany(_id,req.body)
+        //console.log(data,req.body)
+    }
+    catch(e){
+        console.log(e)
+    }
+    res.redirect('/company/list')
+})
+
+router.get('/delete/:id', async (req,res) =>{
+    try{
+        console.log(req.params.id)
+        const data = await Company.deletecompany(req.params.id)
+        //console.log(data,req.body)
+    }
+    catch(e){
+        console.log(e)
+    }
+    res.redirect('/company/list')
+})
+
 module.exports = router;
