@@ -34,10 +34,6 @@ const user = require('./routes/user');
 
 
 //use sessions for tracking logins
-
-
-//check in db
-
 app.use(session({
     secret: 'work hard',
     resave: true,
