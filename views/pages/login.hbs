@@ -8,10 +8,28 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <link rel="shortcut icon" href="img/favicon.jpg">
+    <link rel="shortcut icon" href="img/favicon.jpg"-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="css/font.css">
+    <!-- Google fonts - Muli-->
+    <!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700"-->
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="DataTables/datatables.min.css">
 </head>
+
+
 
 <body>
     <div class="login-page">
@@ -37,11 +55,11 @@
                             <div class="content">
                                 <form method="post" class="form-validate mb-4" action="/user/login" > 
                                     <div class="form-group">
-                                        <input id="login-username" type="text" name="loginUsername" required data-msg="Please enter your username" class="input-material">
-                                        <label for="login-username" class="label-material">User Name</label>
+                                        <input id="login-username" type="text" name="email" required data-msg="Please enter your email" class="input-material">
+                                        <label for="login-username" class="label-material">Email</label>
                                     </div>
                                     <div class="form-group">
-                                        <input id="login-password" type="password" name="loginPassword" required data-msg="Please enter your password" class="input-material">
+                                        <input id="login-password" type="password" name="password" required data-msg="Please enter your password" class="input-material">
                                         <label for="login-password" class="label-material">Password</label>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Login</button>
@@ -56,12 +74,23 @@
             <p>Design by <a href="#" class="external">Kunj | Bhuvnesh | Saksham</a></p>
         </div>
     </div>
-    <!-- JavaScript files-->
+    <!-- JavaScript files>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js" crossorigin="anonymous"></script>
-    <script src="js/front.js"></script>
+    <script src="js/front.js"></script-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="vendor/popper.js/umd/popper.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="js/charts-home.js"></script>
+<script src="js/front.js"></script>
+<script src="js/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 </body>
 
 </html>

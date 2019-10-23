@@ -3,43 +3,72 @@ const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    registerUsername: {type: String, trim:true ,default: ''},
-    registerEmail: {type: String, trim: true, default: ''},
-    registerPassword: {type: String, trim:true ,default: ''}
+  username: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  email: {
+    type: String,
+    unique: true,
+    trim: true,
+    default: '',
+    lowercase: true
+  },
+  password: {
+    type: String,
+    trim: true,
+    default: ''
+  }
 })
 
 //creating function to authenticate input against database
-UserSchema.statics.authenticate = function (username, password, callback) {
-    User.findOne({ registerUsername: username })
-      .exec(function (err, user) {
-        if (err) {
-          return callback(err)
-        } else if (!user) {
-          const err = new Error('User not found.');
-          err.status = 401;
-          return callback(err);
-        }
-        bcrypt.compare(password, user.registerPassword, function (err, result) {
-          if (result === true) {
-            return callback(null, user);
-          } else {
-            return callback();
-          }
-        })
-      });
+UserSchema.statics.authenticate = async (email, password) => {
+  //  console.log(email,password)
+  const user = await User.findOne({
+    email
+  })
+
+  if (!user) {
+    throw new Error('Unable to login')
   }
 
-//hashing a password before saving it to the database
-UserSchema.pre('save', function (next) {
-    const user = this;
-    bcrypt.hash(user.registerPassword, 10, function (err, hash) {
-      if (err) {
-        return next(err);
-      }
-      user.registerPassword = hash;
-      next();
-    })
-  });
+  const isMatch = await bcrypt.compare(password, user.password)
 
-const User = mongoose.model('User', UserSchema);
-module.exports = User;
+  if (!isMatch) {
+    throw new Error('Unable to login')
+  }
+  //console.log(user)
+  return user
+}
+
+UserSchema.statics.findById = async (_id) => {
+  //  console.log(email,password)
+  const user = await User.findOne({
+    _id
+  })
+
+  if (!user) {
+    throw new Error('Unable to find User')
+  }
+
+ // console.log(user)
+  return user
+}
+
+
+
+
+//hashing a password before saving it to the database
+UserSchema.pre('save', async function (next) {
+  const user = this;
+  if (user.isModified('password')) {
+    user.password = await bcrypt.hash(user.password, 8)
+
+    next()
+
+  }
+})
+
+const User = mongoose.model('User', UserSchema)
+module.exports = User

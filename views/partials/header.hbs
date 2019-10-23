@@ -60,8 +60,23 @@
                     <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
                 </div>
                 <div class="right-menu list-inline no-margin-bottom">
+                    <div class="list-inline-item dropdown">
+                        <a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle">
+                            <span id="companyName" class="d-none d-sm-inline-block">{{companyName}}</span>
+                        </a>
+                    <div id="all_companies" aria-labelledby="languages" class="dropdown-menu">
+                        <a rel="nofollow" href="#" class="dropdown-item"> 
+                            <!--img src="img/flags/16/DE.png" alt="English" class="mr-2"-->
+                            <span>German</span>
+                        </a>
+                        <a rel="nofollow" href="#" class="dropdown-item"> 
+                            <img src="img/flags/16/FR.png" alt="English" class="mr-2">
+                            <span>French  </span>
+                        </a>
+                    </div>
+                    </div>
                     <div class="list-inline-item logout">
-                        <a id="logout" href="/login" class="nav-link"> <span class="d-none d-sm-inline">Logout </span><i class="icon-logout"></i></a>
+                        <a id="logout" href="/logout" class="nav-link"> <span class="d-none d-sm-inline">Logout </span><i class="icon-logout"></i></a>
                     </div>
                 </div>
             </div>
