@@ -90,23 +90,6 @@ ItemSchema.statics.updateitem = async (itemid, data) => {
       console.log(e)
     }
   }
-  
-  ItemSchema.statics.deleteitem = async (_id) => {
-    try{
-      //console.log("inside function",itemid,typeof data)
-      const res = await Item.findByIdAndDelete(_id)
-    
-      if(!res){
-        throw newError('No item with given id')
-      }
-  
-      return true
-    }
-    catch(e)
-    {
-      console.log(e)
-    }
-  }
 
 const Item = mongoose.model('Item', ItemSchema);
 module.exports = Item;
