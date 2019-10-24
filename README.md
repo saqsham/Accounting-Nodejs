@@ -1,6 +1,8 @@
 # Accounting-Nodejs
 
-Only Login and and Registration --- #final <br>
-unsolved paths for .hbs files --- #solved <br>
-company back db dojne <br>
-only others remain <br>
+<strong>IWP Project Details </strong> <br>
+Project Id - 34 <br>
+Group Members - <br>
+1. 17BCB0094 Saksham Saini <br>
+2. 17BCE2410 Maniar Kunj <br>
+3. 17BCE2420 Bhuvnesh Pratap Singh <br>
