@@ -5,11 +5,11 @@ const auth = require('../middleware/auth')
 
 
 router.get('/new', auth.isAuthorized, function(req, res, next) {
-    res.render('company/new', {userName: req.session.username, companyName:req.session.companyName, newcompany: true});
+    res.render('company/new', {userName: req.session.username, companyName:req.session.companyName, newcompany: true, title: "New Company"});
 });
 
 router.get('/list', auth.isAuthorized,function(req, res, next) {
-    res.render('company/list', {userName: req.session.username, companyName:req.session.companyName, company_page:true});
+    res.render('company/list', {userName: req.session.username, companyName:req.session.companyName, company_page:true, title: "List Company"});
 });
 
 router.post('/new', async (req, res) => {
@@ -92,7 +92,7 @@ router.get('/edit/:id', async (req,res) =>{
     try{
         const companyd = await Company.findById(_id)
         console.log(companyd)
-        res.render('company/edit',{userName: req.session.username, companyName:req.session.companyName, company_page:true, company:companyd});
+        res.render('company/edit',{userName: req.session.username, companyName:req.session.companyName, company_page:true, company:company, title: "Edit Company"});
     }
     catch(e){
         console.log(e)

@@ -5,15 +5,15 @@ const auth = require('../middleware/auth')
 
 
 router.get('/edit', auth.isAuthorized, function(req, res, next) {
-    res.render('item/edit', {title: "item", userName: req.session.username, companyName:req.session.companyName});
+    res.render('item/edit', {title: "Edit Item", userName: req.session.username, companyName:req.session.companyName});
 });
 
 router.get('/list', auth.isAuthorized, function(req, res, next) {
-    res.render('item/list', {title: "item", userName: req.session.username, companyName:req.session.companyName, item_page:true});
+    res.render('item/list', {title: "List Item", userName: req.session.username, companyName:req.session.companyName, item_page:true});
 });
   
 router.get('/new', auth.isAuthorized, function(req, res, next) {
-    res.render('item/new', {title: "item", userName: req.session.username, companyName:req.session.companyName});
+    res.render('item/new', {title: "New Item", userName: req.session.username, companyName:req.session.companyName});
 });
 
 router.post('/new', auth.isAuthorized, async (req, res) => {
@@ -78,7 +78,7 @@ router.get('/edit/:id', async (req,res) =>{
     try{
         const item = await Item.findById(_id)
         console.log(item)
-        res.render('item/edit',{userName: req.session.username, companyName:req.session.companyName, item:item});
+        res.render('item/edit',{title: "Edit Item", userName: req.session.username, companyName:req.session.companyName, item:item});
     }
     catch(e){
         console.log(e)

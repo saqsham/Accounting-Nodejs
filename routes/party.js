@@ -5,15 +5,15 @@ const auth = require('../middleware/auth')
 
 
 router.get('/edit', auth.isAuthorized, function(req, res, next) {
-    res.render('party/edit', {title: "party", userName: req.session.username, companyName:req.session.companyName});
+    res.render('party/edit', {title: "Edit Party", userName: req.session.username, companyName:req.session.companyName});
 });
 
 router.get('/list', auth.isAuthorized, function(req, res, next) {
-    res.render('party/list', {title: "party", userName: req.session.username, companyName:req.session.companyName, party_page:true});
+    res.render('party/list', {title: "List Party", userName: req.session.username, companyName:req.session.companyName, party_page:true});
 });
   
 router.get('/new', auth.isAuthorized, function(req, res, next) {
-    res.render('party/new', {title: "party", userName: req.session.username, companyName:req.session.companyName});
+    res.render('party/new', {title: "New Party", userName: req.session.username, companyName:req.session.companyName});
 });
 
 router.post('/new', auth.isAuthorized, async (req, res) => {
@@ -78,7 +78,7 @@ router.get('/edit/:id', async (req,res) =>{
     try{
         const party = await Party.findById(_id)
         console.log(party)
-        res.render('party/edit',{userName: req.session.username, companyName:req.session.companyName, party:party});
+        res.render('party/edit',{title: "Edit Party", userName: req.session.username, companyName:req.session.companyName, party:party});
     }
     catch(e){
         console.log(e)
