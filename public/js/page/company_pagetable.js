@@ -1,4 +1,3 @@
-
 function setupData() {
     $(document).ready(function () {
         $('#company').DataTable({

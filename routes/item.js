@@ -78,7 +78,7 @@ router.get('/edit/:id', async (req,res) =>{
     try{
         const item = await Item.findById(_id)
         console.log(item)
-        res.render('item/edit',{title: "Edit Item", userName: req.session.username, companyName:req.session.companyName, item:item});
+        res.render("item/edit",{title: "Edit Item", userName: req.session.username, companyName:req.session.companyName, item:item});
     }
     catch(e){
         console.log(e)

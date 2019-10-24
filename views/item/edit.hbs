@@ -25,12 +25,12 @@
                     <div class="block">
                         <div class="title"><strong>Basic Details</strong></div>
                         <div class="block-body">
-                            <form method="post" class="form-horizontal" action="item/edit">
+                            <form method="post" class="form-horizontal">
                                 <div class="form-group row margin-row">
                                     <label for="model_name" class="col-sm-3 form-control-label">Model Name</label>
                                     <div class="col-sm-9">
-                                        <input required id="model_name" name="modelName" type="text"
-                                            class="form-control" value="{{ modelName }}">
+                                        <input id="model_name" name="newModelName" type="text"
+                                            class="form-control" value="{{ item.newModelName }}">
                                     </div>
                                 </div>
                                 <div class="line"></div>
@@ -38,7 +38,7 @@
                                     <label class="col-sm-3 form-control-label">Company Name</label>
                                     <div class="col-sm-2">
                                         <div class="i-checks">
-                                            <input id="new_company_check" type="checkbox" value="" name="addCompany"
+                                            <input id="new_company_check" type="checkbox" name="companyNamo"
                                                 class="new_check new_company_check checkbox-template">
                                             <label for="new_company_check">Add New</label>
                                         </div>
@@ -46,7 +46,7 @@
                                     <div class="col-sm-7 div_select new_company_check" id="div_select_company">
                                         <select id="company_name" name="company_name"
                                             class="select_id new_company_check form-control mb-3 mb-3 selectpicker"
-                                            data-live-search="true" title="Select Company" required>
+                                            data-live-search="true" title="Select Company" >
                                             {{!-- {% for company in companies %}
                                             <option value={{ company.name }} data-token={{ company.name }}
                                                 {% if company._id==item.company_id %}{{ 'selected' }}{% endif %}>
@@ -61,8 +61,8 @@
                                     </div>
                                     <!--label class="col-sm-2 form-control-label">AddCompany name Name</label-->
                                     <div id="add_company" class="div_add col-sm-7 new_company_check">
-                                        <input id="add_new_company" name="newCompany" placeholder="Add New Company"
-                                            type="text" class="add_new form-control new_company_check" required>
+                                        <input id="add_new_company" name="companyName" value="{{item.companyName}}"
+                                            type="text" class="add_new form-control new_company_check">
                                         <!--small class="help-block-none">Add New Company</small-->
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                     <label class="col-sm-3 form-control-label">HSN Code</label>
                                     <div class="col-sm-9">
                                         <input id="hsn_code" name="hsn" type="text" class="form-control"
-                                            value="{{ hsn }}" required>
+                                            value="{{ item.hsn }}" >
                                     </div>
                                 </div>
                                 <div class="line"></div>
@@ -79,7 +79,7 @@
                                     <label class="col-sm-3 form-control-label">Item Type</label>
                                     <div class="col-sm-2">
                                         <div class="i-checks">
-                                            <input id="new_item_check" name="addItem" type="checkbox" value=""
+                                            <input id="new_item_check" name="itemTypo" type="checkbox" 
                                                 class="new_check checkbox-template">
                                             <label for="new_item_check">Add New</label>
                                         </div>
@@ -87,7 +87,7 @@
                                     <div class="col-sm-7 div_select new_item_check" id="div_select_company">
                                         <select id="type" name="type"
                                             class="select_id form-control mb-3 mb-3 selectpicker new_item_check"
-                                            data-live-search="true" required>
+                                            data-live-search="true" >
                                             {{!-- {% for type in types %}
                                             <option value={{ type.type_name }} data-token={{ type.type_name }}
                                                 {% if type._id==item.type_id %}{{ 'selected' }}{% endif %}>
@@ -101,8 +101,8 @@
                                     </div>
                                     <!--label class="col-sm-2 form-control-label">AddCompany name Name</label-->
                                     <div id="add_company" class="div_add col-sm-7 new_item_check">
-                                        <input required id="add_new_type" name="newItem" type="text"
-                                            placeholder="Add new type" class="add_new form-control new_item_check">
+                                        <input required id="add_new_type" name="itemType" type="text" value="{{item.itemType}}"
+                                            class="add_new form-control new_item_check">
                                         <!--small class="help-block-none">Add New Item</small-->
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <input id="tax" name="tax" type="text" placeholder="%"
-                                                    class="form-control" value="{{ tax }}">
+                                                    class="form-control" value="{{ item.tax }}">
                                             </div>
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <input id="price" name="price" type="text" placeholder="Amount"
-                                                    class="form-control" value="{{ price }}" required>
+                                                    class="form-control" value="{{ item.price }}" required>
                                             </div>
                                         </div>
                                     </div>

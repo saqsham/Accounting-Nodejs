@@ -90,9 +90,8 @@ router.get('/getcompanyforlist',async (req,res) =>{
 router.get('/edit/:id', async (req,res) =>{
     var _id = req.params.id
     try{
-        const companyd = await Company.findById(_id)
-        console.log(companyd)
-        res.render('company/edit',{userName: req.session.username, companyName:req.session.companyName, company_page:true, company:company, title: "Edit Company"});
+        const companyid = await Company.findById(_id)
+        res.render('company/edit',{userName: req.session.username, companyName:req.session.companyName, company_page:true, company:companyid, title: "Edit Company"});
     }
     catch(e){
         console.log(e)
