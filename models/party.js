@@ -31,23 +31,6 @@ PartySchema.statics.findById = async (_id) => {
 }
 
 
-PartySchema.statics.updatecompany = async (companyid, data) => {
-    try{
-      //console.log("inside function",companyid,typeof data)
-      const res = await Party.updateOne({_id: companyid}, data)
-    
-      if(!res){
-        throw newError('No party with given id')
-      }
-  
-      return true
-    }
-    catch(e)
-    {
-      console.log(e)
-    }
-  }
-  
 PartySchema.statics.deleteparty = async (_id) => {
     try{
       //console.log("inside function",companyid,typeof data)
@@ -93,7 +76,9 @@ PartySchema.statics.updateparty = async (partyid, data) => {
     {
       console.log(e)
     }
-  }  
+  }
+
+  
 
 const Party = mongoose.model('Party', PartySchema);
 module.exports = Party;

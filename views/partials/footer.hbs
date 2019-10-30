@@ -73,9 +73,7 @@
 <script src="js/page/item_pagetable.js"></script>
 {{! /if_eq}}
 
-{{!#if_eq website 'new item list' }}
-<script src="js/page/items.js"></script>
-{{! /if_eq}}
+
 
 {{!#if_eq website 'new party' }}
 <script src="js/page/parties.js"></script>
@@ -100,7 +98,9 @@
 <script src="DataTables/datatables.min.js"></script>
 <script src="js/page/item_pagetable.js"></script>
 {{/if}}
-
+{{#if new_item_page }}
+<script src="js/page/items.js"></script>
+{{/if}}
 
 <script>
     $(document).ready(function(){

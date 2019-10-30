@@ -22,7 +22,9 @@ router.post('/register', async (req, res) => {
 router.post('/login', async function(req, res, next) {
 	
 	try{
+		console.log(req.body.email,req.body.password)
 		const user = await User.authenticate(req.body.email,req.body.password)
+
 		req.session.userId = user._id;
 		req.session.username = user.username;
 		req.session.companyName = '';
@@ -36,7 +38,7 @@ router.post('/login', async function(req, res, next) {
 	}
 	catch(e)
 	{
-		console.log("An error has occured")
+		console.log(e,"An error has occured")
 	}
 });
 

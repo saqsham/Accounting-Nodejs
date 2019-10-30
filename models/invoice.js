@@ -1,17 +1,83 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+const InvoiceItem = require('/invoiceItem')
+const InvoiceItemSerialNumber = require('/serialNumber')
+
 
 const InvoiceSchema = new Schema({
-    partyId: {type: String, trim: true ,default: ''},
-    itemId: {type: String, trim: true ,default: ''},
-    numberId: {type: String, trim: true ,default: ''},
+    partyid: {type: String, trim: true ,default: '', required:true},
     date: {type: Date, trim: true, default: ''},
-    quantity: {type: Number, trim:true ,default: ''},
     ratePer: {type: Number, trim:true ,default: ''},
-    amountPrice: {type: Number, trim:true ,default: ''},
-    serialNumber: {type: Number, trim:true ,default: ''},
-    comment: {type: String, trim:true ,default: ''},    
+    totalAmount: {type: Number, trim:true ,default: ''},
+    narration: {type: String, trim:true ,default: ''},
+    eway: {type: String, trim:true ,default: ''},
+    companyid: {type: String, trim: true ,default: '', required: true}    
 })
+
+
+InvoiceSchema.statics.findById = async (_id) => {
+    console.log(_id)
+  const invoice = await Invoice.findOne({
+    _id
+  })
+
+  if (!invoice) {
+    throw new Error('Unable to find invoice')
+  }
+
+ // console.log(user)
+  return invoice
+}
+
+
+InvoiceSchema.statics.deleteinvoice = async (_id) => {
+    try{
+      //console.log("inside function",companyid,typeof data)
+      const res = await Invoice.findByIdAndDelete(_id)
+    
+      if(!res){
+        throw newError('No invoice with given id')
+      }
+  
+      return true
+    }
+    catch(e)
+    {
+      console.log(e)
+    }
+}
+
+
+InvoiceSchema.statics.findByCompanyId = async (companyid)=> {
+
+    const invoices = await Invoice.find({companyid})
+
+    if(!invoices)
+    {
+        throw new Error('No invoice found')
+    }
+
+    return invoices
+}
+
+InvoiceSchema.statics.updateinvoice = async (partyid, data) => {
+    try{
+      //console.log("inside function",partyid,typeof data)
+      const res = await Invoice.updateOne({_id: partyid}, data)
+    
+      if(!res){
+        throw newError('No invoice with given id')
+      }
+  
+      return true
+    }
+    catch(e)
+    {
+      console.log(e)
+    }
+}
+
+
 
 const Invoice = mongoose.model('Invoice', InvoiceSchema);
 module.exports = Invoice;

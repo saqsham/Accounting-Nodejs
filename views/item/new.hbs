@@ -36,19 +36,21 @@
                                     <label class="col-sm-3 form-control-label">Company Name</label>
                                     <div class="col-sm-2">
                                         <div class="i-checks">
-                                            <input id="new_company_check" type="checkbox" name="addCompany" value=""
+                                            <input id="new_company_check" type="checkbox" value=""
                                                 class="new_check new_company_check checkbox-template">
                                             <label for="new_company_check">Add New</label>
                                         </div>
                                     </div>
                                     <div class="col-sm-7 div_select new_company_check" id="div_select_company">
-                                        <select id="company_name" name=""
+                                        <select id="company_name" name="companyName"
                                             class="select_id new_company_check form-control mb-3 mb-3 selectpicker"
                                             data-live-search="true" title="Select Company">
                                             <option value="" disabled selected data-token="option 1">Select Company
                                             </option>
 
-
+                                            {{#each itemCompanies}}
+                                            <option value="{{this.name}}" data-token="{{this.name}}">{{this.name}}</option>
+                                            {{/each}}
                                             {{!-- {% for company in companies %}
                                             <option value={{ company.name }} data-token={{! company.name }}>
                                                 {{! company.name }}</option>
@@ -65,7 +67,7 @@
                                     </div>
                                     <!--label class="col-sm-2 form-control-label">AddCompany name Name</label-->
                                     <div id="add_company" class="div_add col-sm-7 new_company_check">
-                                        <input id="add_new_company" name="companyName" placeholder="Add New Company"
+                                        <input id="add_new_company" name="newCompanyName" placeholder="Add New Company"
                                             type="text" class="add_new form-control new_company_check" required>
                                         <!--small class="help-block-none">Add New Company</small-->
                                     </div>
@@ -82,17 +84,20 @@
                                     <label class="col-sm-3 form-control-label">Item Type</label>
                                     <div class="col-sm-2">
                                         <div class="i-checks">
-                                            <input id="new_item_check" name="newItem" type="checkbox" value=""
+                                            <input id="new_item_check" type="checkbox" value=""
                                                 class="new_check checkbox-template">
                                             <label for="new_item_check">Add New</label>
                                         </div>
                                     </div>
                                     <div class="col-sm-7 div_select new_item_check" id="div_select_company">
-                                        <select id="type" name="type"
+                                        <select id="type" name="itemType"
                                             class="select_id form-control mb-3 mb-3 selectpicker new_item_check"
                                             data-live-search="true" >
                                             <option value="0" disabled selected data-token="option 1">Select Type
                                             </option>
+                                            {{#each itemTypes}}
+                                            <option value="{{this.type}}" data-token="{{this.type}}">{{this.type}}</option>
+                                            {{/each}}
                                             {{!-- {% for type in types %}
                                             <option value={{ type.type_name }} data-token={{! type.type_name }}>
                                                 {{! type.type_name }}</option>
@@ -105,7 +110,7 @@
                                     </div>
                                     <!--label class="col-sm-2 form-control-label">AddCompany name Name</label-->
                                     <div id="add_company" class="div_add col-sm-7 new_item_check">
-                                        <input id="add_new_type" name="itemType" required type="text"
+                                        <input id="add_new_type" name="newItemType" required type="text"
                                             placeholder="Add new type" class="add_new form-control new_item_check">
                                         <!--small class="help-block-none">Add New Item</small-->
                                     </div>
