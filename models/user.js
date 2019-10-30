@@ -24,17 +24,17 @@ const UserSchema = new Schema({
 
 //creating function to authenticate input against database
 UserSchema.statics.authenticate = async (email, password) => {
-  //  console.log(email,password)
+    console.log(email,password)
   const user = await User.findOne({
     email
   })
-
+  console.log(user,password)
   if (!user) {
     throw new Error('Unable to login')
   }
 
   const isMatch = await bcrypt.compare(password, user.password)
-
+  console.log(isMatch,password)
   if (!isMatch) {
     throw new Error('Unable to login')
   }
@@ -63,7 +63,7 @@ UserSchema.statics.findById = async (_id) => {
 UserSchema.pre('save', async function (next) {
   const user = this;
   if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 8)
+    user.password = await bcrypt.hash(user.password, 10)
 
     next()
 

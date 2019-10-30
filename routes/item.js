@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Item = require('../models/item')
+const Item = require('../models/items/item')
+const ItemCompany = require('../models/items/itemCompany')
+const ItemType = require('../models/items/itemType')
 const auth = require('../middleware/auth')
 
 
@@ -12,26 +14,60 @@ router.get('/list', auth.isAuthorized, function(req, res, next) {
     res.render('item/list', {title: "List Item", userName: req.session.username, companyName:req.session.companyName, item_page:true});
 });
   
-router.get('/new', auth.isAuthorized, function(req, res, next) {
-    res.render('item/new', {title: "New Item", userName: req.session.username, companyName:req.session.companyName});
-});
-
-router.post('/new', auth.isAuthorized, async (req, res) => {
-    console.log(req.body)
-    req.body['companyid'] = req.session.companyId
+router.get('/new', auth.isAuthorized, async (req, res) => {
+    console.log(req.session.companyId)
     if(req.session.companyId == null || req.session.companyId == '')
     {
         res.send("Please select Company")
     }
+    const itemCompanies = await ItemCompany.findByCompanyId(req.session.companyId) 
+    const itemTypes = await ItemType.findByCompanyId(req.session.companyId)
+    console.log(itemCompanies,itemTypes)
+    res.render('item/new', {title: "New Item", userName: req.session.username, companyName:req.session.companyName, 
+                            new_item_page:true, itemCompanies:itemCompanies, itemTypes:itemTypes});
+});
+
+router.post('/new', auth.isAuthorized, async (req, res) => {
+    //console.log(req.body)
+    req.body['companyId'] = req.session.companyId
+
+    //console.log(req.body)
+    res.render('item/new')
+
+    if(req.body.newCompanyName!='' && req.body.newCompanyName!=undefined)
+    {
+        req.body['companyName'] = req.body.newCompanyName
+        delete req.body.newCompanyName
+    }
+    if(req.body.newItemType!='' && req.body.newItemType!=undefined)
+    {
+        req.body['itemType'] = req.body.newItemType
+        delete req.body.newItemType
+    }
+    //console.log(req.body)
     const item = new Item(req.body)
     
     try {
-        await item.save()
+        item.save()
 		//res.status(201).send(user)
 	    return res.redirect('/home')
     } catch (e) {
         res.status(400).send(e)
     }
+    // if(req.session.companyId == null || req.session.companyId == '')
+    // {
+    //     res.send("Please select Company")
+    // }
+    // const item = new Item(req.body)
+    
+    // try {
+    //     await item.save()
+	// 	//res.status(201).send(user)
+	//     return res.redirect('/home')
+    // } catch (e) {
+    //     res.status(400).send(e)
+    // }
+    res.send("ok")
 })
 
 
@@ -78,7 +114,13 @@ router.get('/edit/:id', async (req,res) =>{
     try{
         const item = await Item.findById(_id)
         console.log(item)
-        res.render("item/edit",{title: "Edit Item", userName: req.session.username, companyName:req.session.companyName, item:item});
+        const itemCompanies = await ItemCompany.findByCompanyId(req.session.companyId) 
+        const itemTypes = await ItemType.findByCompanyId(req.session.companyId)
+        console.log(itemCompanies,itemTypes)
+        res.render('item/edit', {title: "New Item", userName: req.session.username, companyName:req.session.companyName, 
+                            new_item_page:true, itemCompanies:itemCompanies, itemTypes:itemTypes, item:item});
+
+       // res.render("item/edit",{title: "Edit Item", userName: req.session.username, companyName:req.session.companyName, item:item});
     }
     catch(e){
         console.log(e)
@@ -108,6 +150,8 @@ router.get('/delete/:id', async (req,res) =>{
     }
     res.redirect('/item/list')
 })
+
+
 
 
 module.exports = router;
