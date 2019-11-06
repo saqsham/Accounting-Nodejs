@@ -44,8 +44,11 @@ router.get('/select', async (req,res) => {
 router.get('/getcompanies', async (req,res) =>{
     try{
         const companies = await Company.findByUserId(req.session.userId)
-        req.session.companyname = companies[0].name
-        req.session.id = companies[0]._id
+        if (companies) {
+            req.session.companyname = companies[0].name
+            req.session.id = companies[0]._id
+        }
+        console.log(req.session.companyname)
         res.json({companies : companies, success : true})
 
     }

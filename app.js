@@ -2,11 +2,9 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 // const cookieParser = require('cookie-parser');
-const logger = require('morgan');
 const hbs = require('hbs')
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('./config/mongoose')
 
@@ -18,6 +16,17 @@ db.once('open', function () {
 
 // express, structure define
 const app = express();
+
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
+}));
+
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, './public')
@@ -31,17 +40,6 @@ const invoice = require('./routes/invoice');
 const item = require('./routes/item');
 const party = require('./routes/party');
 const user = require('./routes/user');
-
-
-//use sessions for tracking logins
-app.use(session({
-    secret: 'work hard',
-    resave: true,
-    saveUninitialized: false,
-    store: new MongoStore({
-      mongooseConnection: db
-    })
-}));
 
 // // parse incoming requests
 // app.use(bodyParser.json());
@@ -66,7 +64,6 @@ app.use('/party/delete', express.static(publicDirectoryPath))
 app.use('/item/edit', express.static(publicDirectoryPath))
 app.use('/item/delete', express.static(publicDirectoryPath))
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
