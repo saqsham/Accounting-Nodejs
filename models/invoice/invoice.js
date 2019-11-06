@@ -1,17 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-const InvoiceItem = require('/invoiceItem')
-const InvoiceItemSerialNumber = require('/serialNumber')
+const InvoiceItem = require('./invoiceItem')
+const InvoiceItemSerialNumber = require('./serialNumber')
 
 
 const InvoiceSchema = new Schema({
-    partyid: {type: String, trim: true ,default: '', required:true},
+    partyId: {type: String, trim: true ,default: '', required:true},
     date: {type: Date, trim: true, default: ''},
-    ratePer: {type: Number, trim:true ,default: ''},
+    number: {type: String, trim: true, default: ''},
     totalAmount: {type: Number, trim:true ,default: ''},
     narration: {type: String, trim:true ,default: ''},
-    eway: {type: String, trim:true ,default: ''},
-    companyid: {type: String, trim: true ,default: '', required: true}    
+    eWay: {type: String, trim:true ,default: ''},
+    companyId: {type: String, trim: true ,default: '', required: true}    
 })
 
 
@@ -31,26 +31,26 @@ InvoiceSchema.statics.findById = async (_id) => {
 
 
 InvoiceSchema.statics.deleteinvoice = async (_id) => {
-    try{
-      //console.log("inside function",companyid,typeof data)
-      const res = await Invoice.findByIdAndDelete(_id)
-    
-      if(!res){
-        throw newError('No invoice with given id')
-      }
+  try{
+    //console.log("inside function",companyid,typeof data)
+    const res = await Invoice.findByIdAndDelete(_id)
   
-      return true
+    if(!res){
+      throw newError('No invoice with given id')
     }
-    catch(e)
-    {
-      console.log(e)
-    }
+
+    return true
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
 }
 
 
-InvoiceSchema.statics.findByCompanyId = async (companyid)=> {
+InvoiceSchema.statics.findByCompanyId = async (companyId)=> {
 
-    const invoices = await Invoice.find({companyid})
+    const invoices = await Invoice.find({companyId})
 
     if(!invoices)
     {

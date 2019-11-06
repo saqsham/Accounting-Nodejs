@@ -28,6 +28,20 @@ ItemSchema.statics.findById = async (_id) => {
   return item
 }
 
+ItemSchema.statics.getByName = async (newModelName) => {
+  console.log(newModelName)
+const item = await Item.findOne({
+  newModelName
+})
+
+if (!item) {
+  throw new Error('Unable to find company')
+}
+
+// console.log(user)
+return item
+}
+
 
 ItemSchema.statics.updateitem = async (companyid, data) => {
     try{
@@ -140,6 +154,7 @@ ItemSchema.pre('save', async function (next) {
   next()
 
 })
+
 
 const Item = mongoose.model('Item', ItemSchema);
 module.exports = Item;

@@ -7,13 +7,14 @@
 <div class="page-content">
     <!-- All Items-->
     <div id="items" class="items" style="display: none;">
-        {% for item in items %}
-        <div class="item" model-name={{ item.model_name }} id="item_{{ item.model_name }}" item_id="{{ item._id }}"
-            tax="{{ item.tax }}" price="{{ item.price }}">
+        <!--{% for item in items %} -->
+        {{#each items}}
+        <div class="item" model-name={{ this.newModelName }} id="item_{{ this.newModelName }}" item_id="{{ this._id }}"
+            tax="{{ this.tax }}" price="{{ this.price }}">
         </div>
-
-        {% endfor %}
-        <div id="my_company" gstin={{ company.gstin }}></div>
+        {{/each}}
+        <!--{% endfor %}-->
+        <div id="my_company" gstin={{ gstin }}></div>
     </div>
     <div id="snackbar">Select Party Name first</div>
 
@@ -33,7 +34,7 @@
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="/home">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Invoices</a></li>
-            <li class="breadcrumb-item active">Create Invoice</li>
+            <li class="breadcrumb-item active">New Invoice</li>
         </ul>
     </div>
     <section class="no-padding-top">
@@ -59,17 +60,19 @@
                                     </div>
                                     <!--label class="col-sm-1 form-control-label">Party A/c Name</label-->
                                     <div class="col-sm-6 div_select" id="div_select_party">
-                                        <select id="select_party" name="select_party"
+                                        <select id="select_party" name="partyId"
                                             class="selectpicker select_id form-control mb-3 mb-3 "
                                             data-live-search="true" required>
                                             <option value="" disabled selected data-token="Party_Ac_nmae">Party A/c
                                                 Name
                                             </option>
-                                            {% for party in parties %}
-                                            <option party-id="{{ party._id }}" value="{{ party.gstin}}"
-                                                data-token="{{ party.name }} {{ party.city }}">{{ party.name }}
-                                                ,{{ party.city }}</option>
-                                            {% endfor %}
+                                            <!--{% for party in parties %}-->
+                                            {{#each parties}}
+                                            <option party-id="{{ this._id }}" value="{{ this.gstin}}"
+                                                data-token="{{ this.name }} {{ this.city }}">{{ this.name }}
+                                                ,{{ this.city }}</option>
+                                            {{/each}}
+                                            <!--{% endfor %}-->
                                             <!--option data-token="option 1">option 1</option>
                                                 <option data-token="option 1">option 2</option>
                                                 <option data-token="option 1">option 3</option>
@@ -113,12 +116,14 @@
                                                         Name of
                                                         Item
                                                     </option>
-                                                    {% for item in items %}
-                                                    <option value="select_item_1_{{ item.model_name }}"
-                                                        data-token="{{ item.model_name}}">
-                                                        {{ item.model_name }}
+                                                    <!--{% for item in items %}-->
+                                                    {{#each items}}
+                                                    <option value="select_item_1_{{ this.newModelName }}"
+                                                        data-token="{{ this.newModelName}}">
+                                                        {{ this.newModelName }}
+                                                    {{/each}}
                                                     </option>
-                                                    {% endfor %}
+                                                    <!--{% endfor %}-->
                                                     <!--option value="option 1" data-token="option 1">option 1</option>
                                                     <option value="option 2" data-token="option 2">option 2</option>
                                                     <option value="option 3" data-token="option 3">option 3</option>
@@ -254,7 +259,7 @@
                                         <div class="col-sm-2">
                                         </div>
                                         <div class="col-sm-2">
-                                            <input id="total_amount" name="total_amount" type="text"
+                                            <input id="total_amount" name="totalAmount" type="text"
                                                 class="form-control " placeholder="Amount" readonly>
                                         </div>
                                         <div class="col-sm-2">
@@ -272,7 +277,7 @@
 
                                         </div>
                                         <div class="col-sm-6">
-                                            <input style="background: #2d3035" id="e_way" name="e_way" type="text"
+                                            <input style="background: #2d3035" id="e_way" name="eWay" type="text"
                                                 class="form-control " placeholder="e-Way No.">
                                         </div>
                                     </div>

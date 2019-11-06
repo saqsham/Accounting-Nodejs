@@ -240,6 +240,7 @@ function gst_update(){
     company_gstin=company_gstin.substr(0,2);
     console.log(company_gstin)
     gstin = $('#select_party').val();
+    console.log(gstin)
     sub_gstin = gstin.substr(0,2)
 
     for(var i=0;i<amounts.length;i++){

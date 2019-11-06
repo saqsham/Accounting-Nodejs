@@ -17,19 +17,19 @@ function setupData() {
         $('#invoice').DataTable({
             "ajax": {
                 // "url": "static/objects2.txt", // This works for the static file
-                "url": "index_get_data", // This now works too thanks to @kthorngren
+                "url": "/invoice/getinvoiceforlist", // This now works too thanks to @kthorngren
                 "dataType": "json",
                 "dataSrc": "data",
                 "contentType": "application/json"
             },
             "columns": [
-                {"data": "no"},
+                {"data": "number"},
                 {"data": "date"},
-                {"data": "party_ac_name"},
-                {"data": "party_city"},
-                {"data": "total_amount"},
-                {"data": "party_contact_person_name"},
-                {"data": "party_contact"},
+                {"data": "partyAcName"},
+                {"data": "partyCity"},
+                {"data": "totalAmount"},
+                {"data": "partyContactPersonName"},
+                {"data": "partyContact"},
                 {"data": "actions"}
             ]
         });
