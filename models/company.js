@@ -78,5 +78,24 @@ CompanySchema.statics.deletecompany = async (_id) => {
   }
 }
 
+
+CompanySchema.statics.countTotalDoucments = async (userid) => {
+  try{
+    console.log(userid)
+    const res = await Company.where({userid:userid}).countDocuments()
+  
+    if(!res){
+      throw new Error('No item with given id')
+    }
+
+    return res
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
+}
+
+
 const Company = mongoose.model('Company', CompanySchema);
 module.exports = Company;

@@ -11,49 +11,65 @@
     <section class="no-padding-top no-padding-bottom">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-3 col-sm-6">
+                    <div class="statistic-block block">
+                        <div class="progress-details d-flex align-items-end justify-content-between">
+                            <div class="title">
+                                <div class="icon"><i class="icon-user-1"></i></div><strong> <a href="/company/list">Company</a>
+                                </strong>
+                            </div>
+                            <div class="number dashtext-1">{{ totalCompanies }}</div>
+                        </div>
+                        <div class="progress progress-template">
+                            <div role="progressbar" style="width: {{ totalCompanies5 }}%" aria-valuenow="30"
+                                aria-valuemin="0" aria-valuemax="100"
+                                class="progress-bar progress-bar-template dashbg-1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
                     <div class="statistic-block block">
                         <div class="progress-details d-flex align-items-end justify-content-between">
                             <div class="title">
                                 <div class="icon"><i class="icon-user-1"></i></div><strong> <a href="/item/list">Items</a>
                                 </strong>
                             </div>
-                            <div class="number dashtext-1">\{{ item_count }}</div>
+                            <div class="number dashtext-1">{{ totalItems }}</div>
                         </div>
                         <div class="progress progress-template">
-                            <div role="progressbar" style="width: \{{ item_count/1000 }} %" aria-valuenow="30"
+                            <div role="progressbar" style="width: {{ totalItems500 }}%" aria-valuenow="30"
                                 aria-valuemin="0" aria-valuemax="100"
                                 class="progress-bar progress-bar-template dashbg-1"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-3 col-sm-6">
                     <div class="statistic-block block">
                         <div class="progress-details d-flex align-items-end justify-content-between">
                             <div class="title">
                                 <div class="icon"><i class="icon-contract"></i></div><strong><a href="/party/list">Parties
                                     </a></strong>
                             </div>
-                            <div class="number dashtext-2">\{{ parties_count }}</div>
+                            <div class="number dashtext-2">{{ totalParties }}</div>
                         </div>
                         <div class="progress progress-template">
-                            <div role="progressbar" style="width: \{{ parties_count/2000 }}%" aria-valuenow="70"
+                            <div role="progressbar" style="width: {{ totalParties2000 }}%" aria-valuenow="70"
                                 aria-valuemin="0" aria-valuemax="100"
                                 class="progress-bar progress-bar-template dashbg-2"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-3 col-sm-6">
                     <div class="statistic-block block">
                         <div class="progress-details d-flex align-items-end justify-content-between">
                             <div class="title">
                                 <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong><a
                                         href="/invoice/list">Invoices</a></strong>
                             </div>
-                            <div class="number dashtext-3">\{{ invoices_count }}</div>
+                            <div class="number dashtext-3">{{ totalInvoices }}</div>
                         </div>
                         <div class="progress progress-template">
-                            <div role="progressbar" style="width: \{{ invoices_count/10000 }} %" aria-valuenow="55"
+                            <div role="progressbar" style="width: {{ totalInvoices10000 }}%" aria-valuenow="55"
                                 aria-valuemin="0" aria-valuemax="100"
                                 class="progress-bar progress-bar-template dashbg-3"></div>
                         </div>

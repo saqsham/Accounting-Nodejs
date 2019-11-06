@@ -77,7 +77,22 @@ InvoiceSchema.statics.updateinvoice = async (partyid, data) => {
     }
 }
 
+InvoiceSchema.statics.countTotalDoucments = async (companyId) => {
+  try{
+    console.log(companyId)
+    const res = await Invoice.where({companyId:companyId}).countDocuments()
+  
+    if(!res){
+      throw new Error('No invoice with given id')
+    }
 
+    return res
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
+}
 
 const Invoice = mongoose.model('Invoice', InvoiceSchema);
 module.exports = Invoice;
