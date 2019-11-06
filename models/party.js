@@ -30,6 +30,19 @@ PartySchema.statics.findById = async (_id) => {
   return party
 }
 
+PartySchema.statics.findByGstin = async (gstin) => {
+  console.log(gstin)
+const party = await Party.findOne({
+  gstin
+})
+
+if (!party) {
+  throw new Error('Unable to find company')
+}
+
+// console.log(user)
+return party
+}
 
 PartySchema.statics.deleteparty = async (_id) => {
     try{

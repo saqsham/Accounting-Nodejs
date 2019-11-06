@@ -7,7 +7,7 @@
     <!--link href="//db.onlinewebfonts.com/c/527c5ab608cab860a6aae8ce02e14b0e?family=Calibri" rel="stylesheet" type="text/css"/-->
     <link rel="stylesheet" href="css/print_page.css">
 
-    <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
     <style>
         @page {
             size: auto;   /* auto is the initial value */
@@ -50,27 +50,27 @@
     <table cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse; table-layout: fixed;">
         <tr style="font-style: normal">
             <td colspan="2" rowspan="4"><span
-                    style="font-weight: 800;">{{ invoice_package['company'].name.upper() }}</span>
-                <br>{{ invoice_package['company'].address.upper() }}
-                <br>{{ invoice_package['company'].city.upper() }} Pin code : {{ invoice_package['company'].pincode }}
-                <br>GSTIN : {{ invoice_package['company'].gstin.upper() }}
-                <br>E-Mail : {{ invoice_package['company'].email }}</td>
-            <td colspan="1" rowspan="1"><p style="font-weight: 700;"><span style="color: grey;font-weight: normal">Invoice No.</span><br>{{ invoice_package['invoice'].no }}
+                    style="font-weight: 800;">{{invoicePackage.companyNameUpper }}</span>
+                <br>{{invoicePackage.company.address }}
+                <br>{{invoicePackage.company.city }} Pin code : {{invoicePackage.company.pincode }}
+                <br>GSTIN : {{invoicePackage.company.gstin }}
+                <br>E-Mail : {{invoicePackage.company.email }}</td>
+            <td colspan="1" rowspan="1"><p style="font-weight: 700;"><span style="color: grey;font-weight: normal">Invoice No.</span><br>{{invoicePackage.invoice.no }}
             </p></td>
-            <td colspan="1" rowspan="1"><p style="font-weight: 700;"><span style="color:grey; font-weight: normal;">Dated</span><br>{{ invoice_package['invoice'].date }}
+            <td colspan="1" rowspan="1"><p style="font-weight: 700;"><span style="color:grey; font-weight: normal;">Dated</span><br>{{invoicePackage.invoice.date }}
             </p>
             </td>
         </tr>
         <tr>
             <td><span style="color:grey;">Delivery Note</span><br>
                 <p></p></td>
-            {% if invoice_package['total']>=50000 %}
+            {{#if invoicePackage.iftotalg50k }}
 
             <td><span style="color:grey;">e-Way Bill No.</span><br>
-            <p style="font-weight: 700">{{ invoice_package['invoice'].e_way }}</p></td>
-            {% else %}
+            <p style="font-weight: 700">{{invoicePackage.invoice.eWay }}</p></td>
+            {{else }}
             <td><p></p></td>
-            {% endif %}
+            {{/if}}
         </tr>
         <tr>
             <td><span style="color:grey;">Supplier's Info</span><br>
@@ -86,15 +86,15 @@
         </tr>
         <tr style="font-style: normal;">
             <td colspan="2" rowspan="6"><span style="color:grey;">Buyer</span><br>
-                <p><span style="font-weight: 800;">{{ invoice_package['party'].name.upper() }}</span>
-                    <br>{{ invoice_package['party'].address.upper() }}
-                    <br>{{ invoice_package['party'].city.upper() }}
-                    <br>M-{{ invoice_package['party'].mobile_no_1 }}<br>
-                    <br>GSTIN/UIN : {{ invoice_package['party'].gstin.upper() }}
-                    <br>State Name: {{ invoice_package['party'].state.upper() }},
-                    Code: {{ invoice_package['party'].gstin[:2] }}
-                    <br>Place of supply : {{ invoice_package['party'].state.upper() }}
-                    <br>E-Mail : {{ invoice_package['party'].email }}</p></td>
+                <p><span style="font-weight: 800;">{{invoicePackage.party.name }}</span>
+                    <br>{{invoicePackage.party.address }}
+                    <br>{{invoicePackage.party.city }}
+                    <br>M-{{invoicePackage.party.mobileNumber }}<br>
+                    <br>GSTIN/UIN : {{invoicePackage.party.gstin }}
+                    <br>State Name: {{invoicePackage.party.state }},
+                    Code: {{invoicePackage.party.partyGstinStateCode }}
+                    <br>Place of supply : {{invoicePackage.party.state }}
+                    <br>E-Mail : {{invoicePackage.party.email }}</p></td>
             <!--td><span style="color:grey;">Despatch Doc No.</span><br><p></p></span><br>SE433</td>
             <td c><span style="color:grey;"><span style="color:grey;">Delivery Note Date</span><br><p></p></td-->
             <td><span style="color:grey;">Despatch Doc No.</span><br></td>
@@ -134,42 +134,42 @@
             <th style="width:5%; color:grey;"> GST Rate</th>
             <th style="width:15%; color:grey;"> Amount</th>
         </tr>
-        {% for invoice_item in invoice_package['invoice_items'] %}
+        {{#each invoicePackage.invoiceItems }}
             <tr style="height:15.8px" id="2">
                 <td style="border-bottom: none; border-top:none"
-                    rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
-                ><p>{{ invoice_item['sr_no'] }}</p></td>
-                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                    rowspan="{{#if this.sr_noequaltotalitems}}{{invoicePackage.totalItems14}}{{else}}1{{/if}}"
+                ><p>{{this.sr_no }}</p></td>
+                <td rowspan="{{#if this.sr_noequaltotalitems}}{{invoicePackage.totalItems14}}{{else}}1{{/if}}"
                     style="border-bottom: none; border-top:none;">
-                    <p style="font-weight: 800">{{ invoice_item['item'].model_name.upper() }} {{ invoice_item['item'].type_id.type_name.upper() }}<br><span
+                    <p style="font-weight: 800">{{this.item.newModelName }} {{this.item.typeId.type }}<br><span
                             style="font-size: 10px;font-weight: normal;">
-                        {% for serial_nos in invoice_item['serial_no'] %}{{ serial_nos.serial_no.upper() }}
-                            <br>{% endfor %}</span></p>
+                        {{#each this.serialNos }}{{this.serialNumber }}
+                            <br>{{/each}}</span></p>
                 </td>
-                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                <td rowspan="{{#if this.sr_noequaltotalitems}}{{invoicePackage.totalItems14}}{{else}}1{{/if}}"
                     style="border-bottom: none; border-top:none;"><p
-                        style="text-align: center;">{{ invoice_item['item'].hsn.upper() }}</p></td>
-                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                        style="text-align: center;">{{this.item.hsn }}</p></td>
+                <td rowspan="{{#if this.sr_noequaltotalitems}}{{invoicePackage.totalItems14}}{{else}}1{{/if}}"
                     style="border-bottom: none; border-top:none;"><p
-                        style="text-align: end; font-weight: 800;">{{ invoice_item['invoice_item'].quantity }} PCS</p>
+                        style="text-align: end; font-weight: 800;">{{this.invoiceItem.quantity }} PCS</p>
                 </td>
-                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                <td rowspan="{{#if this.sr_noequaltotalitems}}{{invoicePackage.totalItems14}}{{else}}1{{/if}}"
                     style="border-bottom: none; border-top:none;"><p
-                        style="text-align: end;">{{ invoice_item['invoice_item'].rate_per }}</p>
+                        style="text-align: end;">{{this.invoiceItem.ratePer }}</p>
                 </td>
-                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                <td rowspan="{{#if this.sr_noequaltotalitems}}{{invoicePackage.totalItems14}}{{else}}1{{/if}}"
                     style="border-bottom: none; border-top:none;"><p>PCS</p></td>
-                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                <td rowspan="{{#if this.sr_noequaltotalitems}}{{invoicePackage.totalItems14}}{{else}}1{{/if}}"
                     style="border-bottom: none; border-top:none;"><p
-                        style="text-align: end">{{ invoice_item['item'].tax }}%</p></td>
-                <td rowspan="{{ (14 - invoice_package['total_items']) if invoice_item['sr_no']==invoice_package['total_items'] else 1 }}"
+                        style="text-align: end">{{this.item.tax }}%</p></td>
+                <td rowspan="{{#if this.sr_noequaltotalitems}}{{invoicePackage.totalItems14}}{{else}}1{{/if}}"
                     style="border-bottom: none; border-top:none;"><p
-                        style="text-align: end; font-weight: 800;">{{ invoice_item['amount'] }}</p></td>
+                        style="text-align: end; font-weight: 800;">{{this.amount }}</p></td>
             </tr>
-        {% endfor %}
-        {% for i in range(13 - invoice_package['total_items']) %}
+        {{/each}}
+        {{#each invoicePackage.totalItems13 }}
             <tr></tr>
-        {% endfor %}
+        {{/each}}
         <!--
         -->
         <!--tr></tr>
@@ -191,9 +191,9 @@
             <td><p></p></td>
             <td><p></p></td>
             <td><p></p></td>
-            <td><p style="text-align: end; font-weight: normal">{{ invoice_package['hsn_taxable_total'] }}</p></td>
+            <td><p style="text-align: end; font-weight: normal">{{invoicePackage.hsnTaxableTotal }}</p></td>
         </tr>
-        {% if invoice_package['tax_type']=='gst' %}
+        {{#if invoicePackage.taxTypeGst }}
             <tr id="16">
                 <td><p></p></td>
                 <td><p style="font-weight: 700; text-align: end">CGST</p></td>
@@ -202,7 +202,7 @@
                 <td><p></p></td>
                 <td><p></p></td>
                 <td><p></p></td>
-                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['tax'] }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.tax }}</p></td>
             </tr>
             <tr id="17">
                 <td><p></p></td>
@@ -212,9 +212,9 @@
                 <td><p></p></td>
                 <td><p></p></td>
                 <td><p></p></td>
-                <td><p style="text-align: end;font-weight: 800">{{ invoice_package['tax'] }}</p></td>
+                <td><p style="text-align: end;font-weight: 800">{{invoicePackage.tax }}</p></td>
             </tr>
-        {% else %}
+        {{else}}
 
             <tr id="17">
                 <td><p></p></td>
@@ -224,9 +224,9 @@
                 <td><p></p></td>
                 <td><p></p></td>
                 <td><p></p></td>
-                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['tax'] }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.tax }}</p></td>
             </tr>
-        {% endif %}
+        {{/if}}
         <tr id="18">
             <td><p></p></td>
             <td><p style="text-align: end; font-weight: 700;">Rounding Off</p></td>
@@ -235,27 +235,27 @@
             <td><p></p></td>
             <td><p></p></td>
             <td><p></p></td>
-            <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['round_off'] }}</p></td>
+            <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.roundOff }}</p></td>
         </tr>
         <tr id="19">
             <td><p></p></td>
             <td><p>Total</p></td>
             <td><p></p></td>
-            <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_quantity'] }} PCS</p></td>
+            <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.totalQuantity }} PCS</p></td>
             <td><p></p></td>
             <td><p></p></td>
             <td><p></p></td>
-            <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total'] }}</p></td>
+            <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.total }}</p></td>
         </tr>
     </table>
     <table id="words_table" cellpadding="0" cellspacing="0" style="width: 100%; page-break-after: auto; ">
         <tr>
             <td style="border-top:none; border-bottom: none;"><span
                     style="color:grey">Amount Chargeable (in words)</span><br>
-                <p style="font-weight: 800">{{ invoice_package['total_words'] }} Only</p></td>
+                <p style="font-weight: 800">{{invoicePackage.totalWords }} Only</p></td>
         </tr>
     </table>
-    {% if invoice_package['tax_type']=="gst" %}
+    {{#if invoicePackage.taxTypeGst }}
         <table id="hsn_sac" cellpadding="0" cellspacing="0"
                style="width: 100%; border-collapse: collapse; height: 12px;">
             <tr id="1">
@@ -272,28 +272,28 @@
                 <th style="width:10%; color:grey;"> Amount</th>
 
             </tr>
-            {% for x in invoice_package['hsn_list'] %}
+            {{#each invoicePackage.hsnList }}
                 <tr id="1">
-                    <td><p>{{ x }}</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][0] }}</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][4] }}%</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][2] }}</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][4] }}%</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][2] }}</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][3] }}</p></td>
+                    <td><p>{{x }}</p></td>
+                    <td><p style="text-align: end;">{{this.[0] }}</p></td>
+                    <td><p style="text-align: end;">{{this.[4] }}%</p></td>
+                    <td><p style="text-align: end;">{{this.[2] }}</p></td>
+                    <td><p style="text-align: end;">{{this.[4] }}%</p></td>
+                    <td><p style="text-align: end;">{{this.[2] }}</p></td>
+                    <td><p style="text-align: end;">{{this.[3] }}</p></td>
                 </tr>
-            {% endfor %}
+            {{/each}}
             <tr id="1">
                 <td><p style="text-align: end;font-weight: 800;">Total</p></td>
-                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['hsn_taxable_total'] }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.hsnTaxableTotal }}</p></td>
                 <td><p></p></td>
-                <td><p style="text-align: end;font-weight: 800;">{{ invoice_package['total_tax_amount'] / 2 }}</p></td>
+                <td><p style="text-align: end;font-weight: 800;">{{invoicePackage.totalTaxAmount2 }}</p></td>
                 <td><p></p></td>
-                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_tax_amount'] / 2 }}</p></td>
-                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_tax_amount'] }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.totalTaxAmount2 }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.totalTaxAmount }}</p></td>
             </tr>
         </table>
-    {% else %}
+    {{else }}
         <table id="hsn_sac" cellpadding="0" cellspacing="0"
                style="width: 100%; border-collapse: collapse; height: 12px;">
             <tr id="1">
@@ -307,30 +307,30 @@
                 <th style="width:15%; color:grey;"> Amount</th>
 
             </tr>
-            {% for x in invoice_package['hsn_list'] %}
+            {{#each invoicePackage.hsnList }}
                 <tr id="1">
-                    <td><p>{{ x }}</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][0] }}</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][4] }}%</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][2] }}</p></td>
-                    <td><p style="text-align: end;">{{ invoice_package['hsn_list'][x][3] }}</p></td>
+                    <td><p>{{x }}</p></td>
+                    <td><p style="text-align: end;">{{this.[0] }}</p></td>
+                    <td><p style="text-align: end;">{{this.[4] }}%</p></td>
+                    <td><p style="text-align: end;">{{this.[2] }}</p></td>
+                    <td><p style="text-align: end;">{{this.[3] }}</p></td>
                 </tr>
-            {% endfor %}
+            {{/each}}
             <tr id="1">
                 <td><p style="text-align: end; font-weight: 800;">Total</p></td>
-                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['hsn_taxable_total'] }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.hsnTaxableTotal }}</p></td>
                 <td><p></p></td>
-                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_tax_amount'] }}</p></td>
-                <td><p style="text-align: end; font-weight: 800;">{{ invoice_package['total_tax_amount'] }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.totalTaxAmount }}</p></td>
+                <td><p style="text-align: end; font-weight: 800;">{{invoicePackage.totalTaxAmount }}</p></td>
             </tr>
         </table>
 
-    {% endif %}
+    {{/if}}
     <table cellpadding="0" cellspacing="0" style="width: 100%;">
         <tr>
             <td style="border-bottom: none; border-top: none;"><p style="font-weight: 800; padding-top: 8px;"><span
-                    style="color:grey; font-weight: normal;">Amount Chargeable (in words) : </span>INR {{ invoice_package['tax_words'] }}
-                Only</p></td>
+                    style="color:grey; font-weight: normal;">Amount Chargeable (in words) : </span>INR {{invoicePackage.taxWords }}
+                </p></td>
         </tr>
     </table>
 </div>
@@ -339,7 +339,7 @@
         <div class="col l6" style="padding: 0">
             <p><br>
                 <br><span style="color: grey;">Company's Pan :</span><span id="pan_no"
-                                                                           style="font-weight: 800;">{{ invoice_package['company'].gstin[2:12] }}</span>
+                                                                           style="font-weight: 800;">{{invoicePackage.companyPan }}</span>
                 <br>
                 <br>
             </p>
@@ -347,13 +347,13 @@
         <div class="col l6" style="padding-bottom: 5px;">
             <p><span style="color: grey;">Company Bank Details</span>
                 <br><span style="color: grey;">Bank Name           : </span><span id="bank_name"
-                                                                                  style="font-weight: 800">{{ invoice_package['company'].bank_name.upper() }}</span>
+                                                                                  style="font-weight: 800">{{invoicePackage.company.bankName }}</span>
                 <br><span style="color: grey;">A/c No.             : </span><span id="ac_no"
-                                                                                  style="font-weight: 800">{{ invoice_package['company'].account_number.upper() }}</span>
+                                                                                  style="font-weight: 800">{{invoicePackage.company.accountNumber }}</span>
                 <br><span style="color: grey;">Branch              : </span><span id="ifs"
-                                                                                  style="font-weight: 800">{{ invoice_package['company'].branch.upper() }}</span><span></span>
+                                                                                  style="font-weight: 800">{{invoicePackage.company.branch }}</span><span></span>
                 <br><span style="color: grey;">IFS Code            : </span><span id="ifs"
-                                                                                  style="font-weight: 800">{{ invoice_package['company'].ifsc.upper() }}</span><br><span></span>
+                                                                                  style="font-weight: 800">{{invoicePackage.company.ifsc }}</span><br><span></span>
             </p>
         </div>
     </div>
@@ -373,7 +373,7 @@
             <table cellpadding="0" cellspacing="0" style="width: 100%;">
 
                 <tr>
-                    <td style="border: none; text-align: center">for Shreenathji Enterprise</td>
+                    <td style="border: none; text-align: center">for {{invoicePackage.company.name}}</td>
                 </tr>
                 <tr>
                     <td style="border:none; border-bottom: none; height: 14.8px;"></td>
@@ -389,7 +389,7 @@
     </div>
 
 </div>
-<p style="text-align: center">SUBJECT TO {{ invoice_package['company'].city.upper() }} JURISDICTION<br>This is a
+<p style="text-align: center">SUBJECT TO {{invoicePackage.company.city }} JURISDICTION<br>This is a
     Computer Generated Inovice</p>
 
 

@@ -83,6 +83,17 @@
 <script src="js/page/party_pagetable.js"></script>
 {{! /if_eq}}
 -->
+
+{{#if invoice_list}}
+<script src="DataTables/datatables.min.js"></script>
+<script src = "js/page/invoice_pagetable.js" ></script>
+{{/if}}
+
+
+{{#if invoice_page}}
+<script src="js/page/invoices.js" ></script>
+{{/if}}
+
 {{#if company_page}}
 <script src="DataTables/datatables.min.js"></script>
 <script src="js/page/company_pagetable.js"></script>
