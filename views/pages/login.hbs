@@ -91,6 +91,11 @@
 <script src="js/front.js"></script>
 <script src="js/bootstrap-select/bootstrap-select.min.js"></script>
 <script src="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script>
+    error: function(error){
+          if(error.responseText == 'showAlert')
+              alert("Please enter correct user name and password.");
+</script>
 </body>
 
 </html>

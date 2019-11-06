@@ -38,7 +38,11 @@ router.post('/login', async function(req, res, next) {
 	}
 	catch(e)
 	{
-		console.log(e,"An error has occured")
+		const data = {loginForm: "try afain"}
+		// console.log(data)
+		// return res.redirect('/login')
+		res.redirect(500, '/login')
+		
 	}
 });
 
