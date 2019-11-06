@@ -28,7 +28,7 @@ router.post('/new', auth.isAuthorized, async (req, res) => {
     try {
         await party.save()
 		//res.status(201).send(user)
-	    return res.redirect('/home')
+	    return res.redirect('/party/list')
     } catch (e) {
         res.status(400).send(e)
     }

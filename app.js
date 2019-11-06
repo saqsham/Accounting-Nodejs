@@ -46,6 +46,7 @@ const user = require('./routes/user');
 // app.use(bodyParser.urlencoded({ extended: false }));
 
 // view engine setup
+
 app.set('views', viewsPath);
 app.set('view engine', 'hbs');
 hbs.registerPartials(partialsPath)
@@ -54,6 +55,8 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(publicDirectoryPath))
 app.use('/company', express.static(publicDirectoryPath))
 app.use('/invoice', express.static(publicDirectoryPath))
+app.use('/invoice/new', express.static(publicDirectoryPath))
+app.use('/invoice/print', express.static(publicDirectoryPath))
 app.use('/item', express.static(publicDirectoryPath))
 app.use('/party', express.static(publicDirectoryPath))
 app.use('/user', express.static(publicDirectoryPath))

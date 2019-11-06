@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const SerialNumberSchema = new Schema({
     invoiceItemId: {type: String, trim: true ,default: ''},
-    serialNumber: {type: Date, trim: true, default: ''}
+    serialNumber: {type: String, trim: true, default: ''}
 })
 
 
@@ -41,9 +41,9 @@ SerialNumberSchema.statics.deleteinvoice = async (_id) => {
 
 
 SerialNumberSchema.statics.findByInvoiceItemId = async (invoiceItemId)=> {
-
+    //console.log(invoiceItemId)
     const serialNumbers = await InvoiceItemSerialNumber.find({invoiceItemId})
-
+    //console.log(serialNumbers)
     if(!serialNumbers)
     {
         throw new Error('No invoice items found')

@@ -20,7 +20,7 @@ router.post('/new', async (req, res) => {
     try {
         await company.save()
 		//res.status(201).send(user)
-	    return res.redirect('/home')
+	    return res.redirect('/company/list')
     } catch (e) {
         res.status(400).send(e)
     }

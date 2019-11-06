@@ -50,7 +50,7 @@ router.post('/new', auth.isAuthorized, async (req, res) => {
     try {
         item.save()
 		//res.status(201).send(user)
-	    return res.redirect('/home')
+	    return res.redirect('/items/list')
     } catch (e) {
         res.status(400).send(e)
     }
