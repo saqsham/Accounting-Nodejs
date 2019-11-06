@@ -105,7 +105,27 @@ ItemSchema.statics.updateitem = async (itemid, data) => {
     {
       console.log(e)
     }
+}
+
+
+ItemSchema.statics.countTotalDoucments = async (companyId) => {
+  try{
+    console.log(companyId)
+    const res = await Item.where({companyId:companyId}).countDocuments()
+  
+    if(!res){
+      throw new Error('No item with given id')
+    }
+
+    return res
   }
+  catch(e)
+  {
+    console.log(e)
+  }
+}
+
+
 
 //hashing a password before saving it to the database
 ItemSchema.pre('save', async function (next) {
@@ -154,6 +174,7 @@ ItemSchema.pre('save', async function (next) {
   next()
 
 })
+
 
 
 const Item = mongoose.model('Item', ItemSchema);

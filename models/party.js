@@ -91,6 +91,22 @@ PartySchema.statics.updateparty = async (partyid, data) => {
     }
   }
 
+PartySchema.statics.countTotalDoucments = async (companyid) => {
+    try{
+      console.log(companyid)
+      const res = await Party.where({companyid:companyid}).countDocuments()
+    
+      if(!res){
+        throw new Error('No party with given id')
+      }
+  
+      return res
+    }
+    catch(e)
+    {
+      console.log(e)
+    }
+  }
   
 
 const Party = mongoose.model('Party', PartySchema);
