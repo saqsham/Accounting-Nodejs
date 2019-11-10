@@ -9,7 +9,7 @@ Group Members - <br>
 
 
 Project details: <br>
-  Software Architecture - MVC <br>
-  Application method - CRUD <br>
-  Templating engine - hbs <br>
-  
+  Software Architecture -   MVC <br>
+  Application method -      CRUD <br>
+  Templating engine -       hbs <br>
+  Backend Web Framework -   Expressjs <br>
