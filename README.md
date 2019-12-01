@@ -39,7 +39,7 @@ improve the accounting systems so that they can provide the owners/managers of t
 enterprises with appropriate financial information. The aim is not to add to regulation but to
 identify good practices which small enterprises may consider before deciding on an
 appropriate accounting system. However, these recommendations are in no way intended to
-encroach upon the sovereignty accounting matters. <br>
+encroach upon the sovereignty accounting matters. <br><br>
 Accounting Information System is an integration of various sub-systems such as:<br>
 (i) cash sub-system, <br>(ii) sales and accounts receivable sub-system,<br> (iii) inventory sub-system, <br>
 (iv) purchase and accounts payable sub-system, <br>(v) payroll accounting sub-system, <br>(vi) fixed
