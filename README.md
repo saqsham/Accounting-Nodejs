@@ -14,3 +14,13 @@ Project details: <br>
   Templating engine ----------- hbs <br>
   Backend Web Framework ---- Expressjs <br>
   Databse --------------------- MongoDB <br>
+
+<br>
+The objective of this project is to provide views on how to improve the accounting systems of
+the small enterprises so that they can provide the owners/managers with appropriate financial
+information. This can be achieved through the identification and exchange of views in the
+area of accounting systems of small enterprises.
+As a result of the project, descriptions of accounting systems, guidance and good practices in
+the accounting area for small enterprises will be delivered. To accumulate theoretical
+knowledge with practical experience. To address and understand accounting procedures of a
+company. To recommend some issues regarding accounting system of the company
