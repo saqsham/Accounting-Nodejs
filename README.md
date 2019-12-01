@@ -15,7 +15,8 @@ Project details: <br>
   Backend Web Framework ---- Expressjs <br>
   Databse --------------------- MongoDB <br>
 
-<br>
+<hr>
+<h2><strong> Abstract </strong></h2><br>
 The objective of this project is to provide views on how to improve the accounting systems of
 the small enterprises so that they can provide the owners/managers with appropriate financial
 information. This can be achieved through the identification and exchange of views in the
