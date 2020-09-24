@@ -34,7 +34,6 @@ router.post('/login', async function(req, res, next) {
 		//console.log(user)
 		
 		return res.redirect('/home')
-		
 	}
 	catch(e)
 	{
